@@ -1,0 +1,126 @@
+<div fxFlex fxLayout="column" fxLayoutGap="100px">
+    <br>
+    &nbsp;&nbsp;&nbsp;
+    <div fxFlex fxLayout.xs="column">
+        &nbsp;&nbsp;&nbsp;
+        <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/jobDesciption']">Back to
+            Jobs
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button matButton="elevated" color="primary" class="select-button" (click)="saveJD()">{{ buttonText }}
+        </button>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div>
+        <form [formGroup]="formName">
+            <br>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Company Name</mat-label>
+                <mat-select placeholder="Company Name" formControlName="company" required>
+                    @for (element of company; track element){
+                    <mat-option [value]="element">
+                        {{element.compName}}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Job Title</mat-label>
+                <input matInput formControlName="jobPositionTitle" placeholder="Job Title" required autocomplete="off"
+                    spellcheck="false" name="jobPositionTitle" id="jobPositionTitle" type="text">
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Position Status</mat-label>
+                <mat-select placeholder="Position Status" formControlName="positionStatus" required
+                    name="positionStatus" id="positionStatus">
+                    @for (element of positionStatus; track element){
+                    <mat-option [value]="element">
+                        {{element.statusName}}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Position Urgency</mat-label>
+                <mat-select placeholder="Position Urgency" formControlName="positionUrgency" required
+                    name="positionUrgency" id="positionUrgency">
+                    @for (element of positionUrgency; track element){
+                    <mat-option [value]="element">
+                        {{element.statusName}}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <br>
+            &nbsp;&nbsp;&nbsp;
+            <mat-label>Job Details</mat-label>
+            <mat-divider></mat-divider>
+            <br>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Exp From</mat-label>
+                <input matInput formControlName="experienceFrom" placeholder="Exp From" required autocomplete="off"
+                    spellcheck="false" name="experienceFrom" id="experienceFrom" type="number">
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Exp To</mat-label>
+                <input matInput formControlName="experienceTo" placeholder="Exp To" required autocomplete="off"
+                    spellcheck="false" name="experienceTo" id="experienceTo" type="number">
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Pkg From</mat-label>
+                <input matInput formControlName="pkgRangeFrom" placeholder="Exp From" required autocomplete="off"
+                    spellcheck="false" name="pkgRangeFrom" id="pkgRangeFrom" type="text">
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+                <mat-label>Pkg To</mat-label>
+                <input matInput formControlName="pkgRangeTo" placeholder="Exp To" required autocomplete="off"
+                    spellcheck="false" name="pkgRangeTo" id="pkgRangeTo" type="text">
+            </mat-form-field>
+            <br>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field class="full-width-field">
+                <mat-label>Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="description"
+                    placeholder="description" required autocomplete="off" spellcheck="false" name="description"
+                    id="description" autocomplete="off"></textarea>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field class="full-width-field">
+                <mat-label>Responsibility</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="responsibility"
+                    placeholder="responsibility" required autocomplete="off" spellcheck="false"
+                    autocomplete="off"></textarea>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <mat-form-field class="full-width-field">
+                <mat-label>Skill Set</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="skillset"
+                    placeholder="skillset" required autocomplete="off" spellcheck="false" autocomplete="off"></textarea>
+            </mat-form-field>
+            <br>
+
+            <!-- <mat-form-field>
+                <mat-select placeholder="Status" formControlName="compStatus" required name="compStatus"
+                    id="compStatus">
+                    @for (element of status; track element){
+                    <mat-option [value]="element">
+                        {{element.statusName}}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field> -->
+
+
+        </form>
+
+
+    </div>
+</div>

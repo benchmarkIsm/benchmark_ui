@@ -1,0 +1,123 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="formName" style="height: 700px; width: 850px; font-size: 0.95rem">
+        <mat-label>Company Information</mat-label>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-form-field>
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="compName" id="compName" required autocomplete="off" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Company Phone</mat-label>
+            <input matInput formControlName="compPhone" placeholder="Phone" required autocomplete="off"
+                spellcheck="false" name="compPhone" id="compPhone" autocomplete="compPhone" maxlength="50" type="text">
+        </mat-form-field>
+        <br>
+        <mat-label>Contact Person Information</mat-label>
+        <mat-divider></mat-divider>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Contact Person</mat-label>
+            <input matInput formControlName="contactPersonName" placeholder="Contact Person" required autocomplete="off"
+                spellcheck="false" name="contactPersonName" id="contactPersonName" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Contact Person Phone</mat-label>
+            <input matInput formControlName="contactPersonPhone" placeholder="Contact Person Phone" required
+                autocomplete="off" spellcheck="false" name="contactPersonPhone" id="contactPersonPhone" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Contact Person Email</mat-label>
+            <input matInput formControlName="contactPersonEmail" placeholder="Contact Person Email" required
+                autocomplete="off" spellcheck="false" name="contactPersonEmail" id="contactPersonEmail"
+                autocomplete="contactPersonEmail">
+        </mat-form-field>
+        <br>
+        <mat-label>Alt Contact Person Information</mat-label>
+        <mat-divider></mat-divider>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Alt Contact Person</mat-label>
+            <input matInput formControlName="altContactPerson" placeholder="Alt Contact Person" autocomplete="off"
+                spellcheck="false" name="altContactPerson" id="altContactPerson" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Alt Contact Phone</mat-label>
+            <input matInput formControlName="altContactPhone" placeholder="Alt Contact Phone" autocomplete="off"
+                spellcheck="false" name="altContactPhone" id="altContactPhone" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Alt Contact Email</mat-label>
+            <input matInput formControlName="altContactEmail" placeholder="Alt Contact Email" autocomplete="off"
+                spellcheck="false" name="altContactEmail" id="altContactEmail" autocomplete="altContactEmail">
+        </mat-form-field>
+        <br>
+        <mat-label>Company Details</mat-label>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-form-field>
+            <mat-label>Company Address</mat-label>
+            <input matInput formControlName="compAddress" placeholder="Phone" autocomplete="off" spellcheck="false"
+                name="compAddress" id="compAddress" autocomplete="compAddress">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Company Website</mat-label>
+            <input matInput formControlName="compWebsite" placeholder="Company Website" autocomplete="off"
+                spellcheck="false" name="compWebsite" id="compWebsite" autocomplete="compWebsite">
+        </mat-form-field>
+        <br>
+        <mat-label>Finanance Details</mat-label>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-form-field>
+            <mat-label>PAN/TAN</mat-label>
+            <input matInput formControlName="panTan" placeholder="PAN/TAN" autocomplete="off" spellcheck="false"
+                name="panTan" id="panTan" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Comp Reg Code</mat-label>
+            <input matInput formControlName="compRegCode" placeholder="Comp Reg Code" autocomplete="off"
+                spellcheck="false" name="compRegCode" id="compRegCode" type="text">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Service Tax</mat-label>
+            <input matInput formControlName="serviceTax" placeholder="Service Tax" autocomplete="off" spellcheck="false"
+                name="serviceTax" id="serviceTax" autocomplete="serviceTax">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-select placeholder="Status" formControlName="compStatus" required name="compStatus" id="compStatus">
+                @for (element of status; track element){
+                <mat-option [value]="element">
+                    {{element.statusName}}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        &nbsp;&nbsp;&nbsp;
+        <mat-checkbox formControlName="mouSigned" color="primary">MOU Signed</mat-checkbox>
+
+    </form>
+</mat-dialog-content>
+
+<br>
+
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+    <!-- <button mat-raised-button (click)="copyToNew()">Copy to New</button> -->
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="!isFormValid" (click)="save()">{{actionButtonText}}</button>
+</mat-dialog-actions>

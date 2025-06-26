@@ -1,0 +1,38 @@
+<div fxFlex fxLayout="column" fxLayoutGap="25px">
+
+    <br>
+    <br>
+    <div fxFlex fxLayout.xs="column">
+        &nbsp;&nbsp;&nbsp;
+        <button matButton="elevated" color="primary" class="select-button">Add
+            Status</button>
+    </div>
+    <br>
+    <br>
+
+    <table mat-table [dataSource]="dataSource" [hidden]="dataSource.data.length==0">
+
+        <ng-container matColumnDef="statusName">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let status" class='card-title'>{{status.statusName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="generatedFor">
+            <th mat-header-cell *matHeaderCellDef>Status For</th>
+            <td mat-cell *matCellDef="let status">{{status.statusGenrated}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="edit_action">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let ivName">
+                <button mat-icon-button class="screen-only">
+                    <mat-icon svgIcon="edit_icon" matTooltip="Edit name"></mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns" tabindex="999"></tr>
+    </table>
+</div>

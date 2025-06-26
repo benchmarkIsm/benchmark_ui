@@ -1,0 +1,245 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap-reboot.css';
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* @import '../node_modules/@angular/material/' */
+@import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css';
+@import 'ngx-toastr/toastr';
+@import '../node_modules/saturn-datepicker/bundle.css';
+
+:root {
+  --spire-red: #CF0A2C;
+}
+
+:focus {
+  outline: 0 !important;
+}
+
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: var(--spire-red)
+}
+
+.default-spinner {
+  margin-left: 30px;
+  margin-top: 4px;
+}
+
+.middle-spinner {
+  margin: auto;
+  margin-top: 40px;
+}
+
+.temphumiwarning {
+  font-style: italic;
+  color: #a10d0d;
+  font-size: 0.8rem;
+}
+
+
+.timestamp {
+  font-style: italic;
+  color: #0D47A1;
+  font-size: 0.8rem;
+}
+
+table {
+  white-space: nowrap;
+}
+
+.diagnostic {
+  text-align: right;
+  font-family: 'Lato';
+  color: #0D47A1;
+}
+
+.data-black {
+    font-family: 'Lato';
+    font-size: 0.9rem;
+  }
+
+  .data-title {
+      font-weight: bold;
+    font-family: 'Lato';
+    font-size: 0.9rem;
+  }
+    
+.subtitle {
+  color: dimgray;
+  font-variant: all-petite-caps;
+}
+
+.guidelines {
+  font-size: 0.8rem;
+}
+
+.content {
+    min-width: 300px;
+  }
+
+  .diagnostics {
+    min-width: 300px;
+    max-height:500px; /*todo: make to bottom screen */
+    }
+    .diagnostics td{
+        font-size: .5rem;
+        }
+
+
+
+/* Used to break line in Flex UI */
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+
+/* Toastr Notifications customization*/
+.notifier {
+  font-size: small;
+}
+
+#toast-container>div {
+  width: 400px;
+}
+
+
+.make-yellow {
+  background-color: yellow
+}
+
+.make-orange {
+  background-color: orange
+}
+
+.make-green {
+  background-color: rgb(22, 218, 32)
+}
+
+
+/* Use this to limit text width, text will be abbreviated with ...*/
+.custom-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  display: inline-block;
+}
+
+
+.mobile-only {
+  display: none !important;
+}
+
+/* Small screen properties */
+@media screen and (max-width: 480px) {
+  .screen-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: initial !important;
+  }
+
+  #toast-container>div {
+    width: 300px;
+  }
+}
+
+
+
+
+
+/* 
+CSS to add spinner to a mat-button
+https://dkreider.medium.com/how-to-add-a-spinner-to-an-angular-material-button-the-simplest-way-ever-69e2f7005f29 
+*/
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+
+/* Hide Arrows From Input Number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.mat-form-field-label:not(.mat-form-field-empty) {
+  font-size: 1rem;
+  font-family: sans-serif;
+  color: black !important;
+}
+
+
+/* IV Chart */
+
+.chart {
+  width: 90%;
+  height: 80%;
+  min-height: 350px;
+  /* min-height: 1150px; */
+}
+
+.dygraph-label {
+  font-size: 14px;
+  text-align: center;
+}
+
+.dygraph-label.dygraph-ylabel,
+.dygraph-label.dygraph-y2label {
+  /* This rule only applies to the y-axis label */
+  font-size: 14px;
+  text-align: center;
+}
+
+
+
+.dygraph-label.dygraph-ylabel {
+  color: #284784;
+}
+
+.dygraph-label.dygraph-y2label {
+  color: #F08217;
+}
+
+.dygraph-ylabel {
+  margin: -10% -10% -10% -50px ;
+}
+
+.dygraph-y2label {
+  margin: -10% -10% -10% 160px;
+  max-width: 100px;
+  width: 100px;
+}
+
+.light_uv svg {
+  fill: rgb(154, 0, 192);
+}

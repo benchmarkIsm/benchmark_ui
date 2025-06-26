@@ -1,0 +1,62 @@
+.mat-toolbar,
+.mat-indigo,
+.mat-toolbar-single-row {
+   background-color: #e9eeee;
+   color: white;
+}
+
+.title {
+   text-align: right;
+   letter-spacing: 1px;
+}
+
+.header-subtitle {
+   font-weight: bold;
+   text-align: center;
+   padding-left: 100%;
+   color: whitesmoke;
+   letter-spacing: 1px;
+   font-size: inherit;
+}
+
+.header-user {
+   font-weight: lighter;
+   color: rgb(26, 193, 223);
+   letter-spacing: 1px;
+   font-size: 10;
+}
+
+.userInfo {
+   text-align: right;
+   font-size: 0.8rem;
+   padding-top: 0.8%
+}
+
+.userIcon {
+   font-size: 1.2rem;
+   margin-bottom: 10% !important;
+}
+
+.app-toolbar {
+   position: sticky;
+   position: -webkit-sticky;
+   /* For macOS/iOS Safari */
+   top: 0;
+   /* Sets the sticky toolbar to be on top */
+   z-index: 1000;
+   /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+button.mat-menu-item {
+   outline: none !important;
+}
+
+button.mat-icon-button {
+   outline: none !important;
+}
+
+
+#logo {
+   width: 100%;
+   width: -moz-available;
+}

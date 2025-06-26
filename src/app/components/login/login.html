@@ -1,0 +1,59 @@
+<!-- <div class="main">
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" type="text" formControlName="username" />
+
+
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
+
+
+    </div>
+
+    <div>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password">
+      </mat-form-field>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+</div> -->
+
+
+<div class="main-div">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <img src="../../../assets/img/BENCHMARK-logo.png" alt="Card Image">
+    </mat-card-header>
+    <br>
+    <br>
+    <mat-card-content [formGroup]="loginForm" (keyup.enter)="onSubmit()">
+      <mat-form-field>
+        <mat-label>username</mat-label>
+        <input matInput type="text" formControlName="username" required autofocus name="randomname" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>password</mat-label>
+        <input autocomplete="new-password" matInput type="text" formControlName="password" required autofocus
+          name="randomname" />
+      </mat-form-field>
+
+      <!-- <div *ngIf="error" class="errorMessage"> {{error}}</div> -->
+      <!-- <div *ngIf="!error" class="spacer"></div> -->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button id="loginButton" (click)="onSubmit()" (keyup.enter)="onSubmit()" color="spire">
+        LOGIN
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<!-- [disabled]="!formValid || loading" -->

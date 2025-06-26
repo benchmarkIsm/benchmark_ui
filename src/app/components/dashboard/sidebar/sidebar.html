@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="top-toolbar">
+  <!-- <button mat-icon-button (click)="sidenav.toggle()"> -->
+  <button mat-icon-button>
+
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav 
+    #sidenav 
+    mode="over" 
+    [(opened)]="opened" 
+    class="sidenav"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <nav class="sidenav-links">
+      <a mat-button href="./listAdmin">Admin</a>
+      <a mat-button>Company</a>
+      <a mat-button>Job Description</a>
+      <a mat-button>Candidate</a>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <div class="main-content">
+      <h2>Welcome to My App</h2>
+      <p>This is the content menu.</p>
+    </div> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

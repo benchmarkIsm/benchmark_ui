@@ -1,0 +1,32 @@
+/* Push the container below the fixed toolbar */
+.sidenav-container {
+  height: 100vh;
+  margin-top: 64px;
+}
+
+/* Sidenav styling */
+.sidenav {
+  width: 200px;
+  border-right: 1px solid #ccc; /* Adds border */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional subtle shadow */
+}
+
+/* Sidenav links on separate lines */
+.sidenav-links a {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Fixed top toolbar */
+.top-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+/* Content padding */
+.main-content {
+  padding: 16px;
+}

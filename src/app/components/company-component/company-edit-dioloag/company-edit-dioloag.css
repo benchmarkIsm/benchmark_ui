@@ -1,0 +1,15 @@
+
+
+.mat-description {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.mat-divider-width{
+    border-top-width: 2px;
+    border-top-color: rgb(14, 1, 1);
+  }
+
+  .full-width-field {
+    width: 100%;
+ }

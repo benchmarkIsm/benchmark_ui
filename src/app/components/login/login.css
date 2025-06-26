@@ -1,0 +1,54 @@
+.main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    label{
+        font-size: 20px;
+    }
+
+    input{
+        width: 200x;
+        height: 30px;
+    }
+
+.login-card {
+    min-height: 400px;
+    height: 40%;
+    width: 400px;
+    margin-bottom: 10%;
+}
+
+.main-div {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    object-fit: scale-down;
+    width: 80%;
+    height: 80%
+}
+
+mat-form-field {
+    width: 100%;
+    font-size: 14pt;
+}
+
+table,
+th,
+td {
+    width: 100%;
+}
+
+#loginButton {
+    width: 100%;
+}
+
+.errorMessage {
+    color: red;
+}

@@ -1,0 +1,63 @@
+<div fxFlex fxLayout="column" fxLayoutGap="100px">
+
+    <!-- Add new machine -->
+    <br>
+    <br>
+
+    <div fxFlex fxLayout.xs="column">
+        &nbsp;&nbsp;&nbsp;
+        <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/jdDetails']">Add
+            Job</button>
+    </div>
+
+    <br>
+    <br>
+    <table mat-table [dataSource]=" dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="compid">
+            <th mat-header-cell *matHeaderCellDef>Company Code</th>
+            <td mat-cell *matCellDef="let element" class='card-title'>{{element.company.compName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="jobPositionTitle">
+            <th mat-header-cell *matHeaderCellDef>Job Position Title</th>
+            <td mat-cell *matCellDef="let element">{{element.jobPositionTitle}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="positionStatus">
+            <th mat-header-cell *matHeaderCellDef>Position Status</th>
+            <td mat-cell *matCellDef="let element">{{element.positionStatus}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="urgencyStatus">
+            <th mat-header-cell *matHeaderCellDef>Urgency</th>
+            <td mat-cell *matCellDef="let element">{{element.positionUrgency}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="experienceFrom">
+            <th mat-header-cell *matHeaderCellDef>Exp from</th>
+            <td mat-cell *matCellDef="let element">{{ element.experienceFrom }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="experienceTo">
+            <th mat-header-cell *matHeaderCellDef>Exp To</th>
+            <td mat-cell *matCellDef="let element">{{ element.experienceTo }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="edit_action">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button class="screen-only">
+                    <mat-icon svgIcon="edit_icon" [routerLink]="['/jdDetails']" [state]="element"></mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+    </table>
+</div>

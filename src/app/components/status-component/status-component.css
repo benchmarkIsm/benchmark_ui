@@ -1,0 +1,71 @@
+
+@media screen and (max-width: 480px) {
+
+    .mat-elevation-z8 {
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .mat-header-row {
+        display: none;
+    }
+
+    tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .mat-table .mat-row {
+        display: block;
+        overflow: hidden;
+        height: auto;
+        position: relative;
+        clear: both;
+        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+        background-color: #fff;
+        border-radius: 3px;
+    }
+
+    .mat-table .mat-row+.mat-row {
+        margin-top: 24px;
+    }
+
+    .mat-table .mat-cell {
+        display: block;
+        width: 100%;
+        padding: 0 16px;
+        margin: 16px 0;
+        border: 0 none;
+    }
+
+    .mat-table .mat-cell:first-child {
+        padding: 0 48px 0 16px;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+}
+
+section {
+  display: flex;
+  align-items: center;
+}
+
+.example-label {
+  font-size: 14px;
+  margin: 0 16px 0 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
