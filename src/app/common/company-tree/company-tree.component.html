@@ -1,15 +1,23 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="company-tree">
     <mat-nested-tree-node *matTreeNodeDef="let node">
-        <div class="mat-tree-node" matTreeNodePadding>
-            <button mat-icon-button *ngIf="hasChild(0, node)" matTreeNodeToggle
-                [attr.aria-label]="'toggle ' + node.name">
-                <mat-icon fontIcon="{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}"></mat-icon>
-            </button>
-            <span *ngIf="!hasChild(0, node)">
-                <mat-icon fontIcon="work"></mat-icon>
-            </span>
-            {{ node.name }}
+        <div class="mat-tree-node node-row" [class.active-node]="selectedRoute === node.id" matTreeNodePadding
+            (click)="navigate(node.id)">
+            <ng-container *ngIf="hasChild(0, node); else leafIcon">
+                <span class="toggle-icon" (click)="$event.stopPropagation()" matTreeNodeToggle>
+                    <mat-icon>
+                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                    </mat-icon>
+                </span>
+            </ng-container>
+
+            <ng-template #leafIcon>
+                <!-- no stopPropagation here so icon click also triggers navigate -->
+                <mat-icon class="node-icon">person</mat-icon>
+            </ng-template>
+
+            <span class="node-text">{{ node.name }}</span>
         </div>
+
         <div *ngIf="hasChild(0, node) && treeControl.isExpanded(node)">
             <ng-container matTreeNodeOutlet></ng-container>
         </div>

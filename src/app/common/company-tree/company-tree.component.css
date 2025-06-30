@@ -1,30 +1,67 @@
 ::ng-deep .company-tree {
-  max-width: 400px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 480px;
+  padding: 16px;
+  margin: 24px 0;
   font-family: Roboto, sans-serif;
 }
 
-::ng-deep .mat-tree-node.node-row {
+/* Tree row styling */
+::ng-deep .node-row {
   display: flex;
   align-items: center;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
 }
 
-::ng-deep .mat-tree-node.node-row:hover {
-  background-color: #e3f2fd;
+::ng-deep .node-row:hover {
+  background-color: #e8f0fe;
   cursor: pointer;
 }
 
-::ng-deep .node-icon {
-  margin-right: 8px;
-  color: #3f51b5;
+/* Active (selected) node */
+::ng-deep .node-row.active-node {
+  background-color: #d2e3fc;
+  font-weight: 600;
+  border-left: 4px solid #1a73e8;
 }
 
+::ng-deep .node-row.active-node .node-text {
+  color: #1a73e8;
+}
+
+/* Chevron / toggle icon */
+::ng-deep .toggle-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  cursor: pointer;
+}
+
+::ng-deep .toggle-icon mat-icon {
+  font-size: 22px;
+  color: #1a73e8;
+}
+
+/* Leaf node icon */
+::ng-deep .node-icon {
+  font-size: 22px;
+  margin-right: 14px;
+  color: #1a73e8;
+}
+
+/* Node text */
 ::ng-deep .node-text {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+  line-height: 1.5;
+}
+
+/* Optional separator */
+::ng-deep .mat-nested-tree-node + .mat-nested-tree-node {
+  border-top: 1px solid #f1f3f4;
 }

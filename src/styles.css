@@ -1,23 +1,22 @@
-@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css';
-@import '../node_modules/bootstrap/dist/css/bootstrap-reboot.css';
-@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap-reboot.css";
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 /* @import '../node_modules/@angular/material/' */
-@import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css';
-@import 'ngx-toastr/toastr';
-@import '../node_modules/saturn-datepicker/bundle.css';
+@import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
+@import "ngx-toastr/toastr";
+@import "../node_modules/saturn-datepicker/bundle.css";
 
 :root {
-  --spire-red: #CF0A2C;
+  --spire-red: #cf0a2c;
 }
 
 :focus {
   outline: 0 !important;
 }
 
-
 .mat-progress-spinner circle,
 .mat-spinner circle {
-  stroke: var(--spire-red)
+  stroke: var(--spire-red);
 }
 
 .default-spinner {
@@ -36,10 +35,9 @@
   font-size: 0.8rem;
 }
 
-
 .timestamp {
   font-style: italic;
-  color: #0D47A1;
+  color: #0d47a1;
   font-size: 0.8rem;
 }
 
@@ -49,21 +47,21 @@ table {
 
 .diagnostic {
   text-align: right;
-  font-family: 'Lato';
-  color: #0D47A1;
+  font-family: "Lato";
+  color: #0d47a1;
 }
 
 .data-black {
-    font-family: 'Lato';
-    font-size: 0.9rem;
-  }
+  font-family: "Lato";
+  font-size: 0.9rem;
+}
 
-  .data-title {
-      font-weight: bold;
-    font-family: 'Lato';
-    font-size: 0.9rem;
-  }
-    
+.data-title {
+  font-weight: bold;
+  font-family: "Lato";
+  font-size: 0.9rem;
+}
+
 .subtitle {
   color: dimgray;
   font-variant: all-petite-caps;
@@ -74,18 +72,16 @@ table {
 }
 
 .content {
-    min-width: 300px;
-  }
+  min-width: 300px;
+}
 
-  .diagnostics {
-    min-width: 300px;
-    max-height:500px; /*todo: make to bottom screen */
-    }
-    .diagnostics td{
-        font-size: .5rem;
-        }
-
-
+.diagnostics {
+  min-width: 300px;
+  max-height: 500px; /*todo: make to bottom screen */
+}
+.diagnostics td {
+  font-size: 0.5rem;
+}
 
 /* Used to break line in Flex UI */
 .break {
@@ -93,29 +89,26 @@ table {
   height: 0;
 }
 
-
 /* Toastr Notifications customization*/
 .notifier {
   font-size: small;
 }
 
-#toast-container>div {
+#toast-container > div {
   width: 400px;
 }
 
-
 .make-yellow {
-  background-color: yellow
+  background-color: yellow;
 }
 
 .make-orange {
-  background-color: orange
+  background-color: orange;
 }
 
 .make-green {
-  background-color: rgb(22, 218, 32)
+  background-color: rgb(22, 218, 32);
 }
-
 
 /* Use this to limit text width, text will be abbreviated with ...*/
 .custom-overflow {
@@ -125,7 +118,6 @@ table {
   max-width: 90%;
   display: inline-block;
 }
-
 
 .mobile-only {
   display: none !important;
@@ -141,14 +133,10 @@ table {
     display: initial !important;
   }
 
-  #toast-container>div {
+  #toast-container > div {
     width: 300px;
   }
 }
-
-
-
-
 
 /* 
 CSS to add spinner to a mat-button
@@ -161,7 +149,7 @@ https://dkreider.medium.com/how-to-add-a-spinner-to-an-angular-material-button-t
 }
 
 .spinner:before {
-  content: '';
+  content: "";
   box-sizing: border-box;
   position: absolute;
   top: 50%;
@@ -173,9 +161,8 @@ https://dkreider.medium.com/how-to-add-a-spinner-to-an-angular-material-button-t
   border-radius: 50%;
   border: 2px solid #ffffff;
   border-top-color: #000000;
-  animation: spinner .8s linear infinite;
+  animation: spinner 0.8s linear infinite;
 }
-
 
 /* Hide Arrows From Input Number */
 
@@ -187,17 +174,15 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
-
 
 .mat-form-field-label:not(.mat-form-field-empty) {
   font-size: 1rem;
   font-family: sans-serif;
   color: black !important;
 }
-
 
 /* IV Chart */
 
@@ -220,18 +205,16 @@ input[type=number] {
   text-align: center;
 }
 
-
-
 .dygraph-label.dygraph-ylabel {
   color: #284784;
 }
 
 .dygraph-label.dygraph-y2label {
-  color: #F08217;
+  color: #f08217;
 }
 
 .dygraph-ylabel {
-  margin: -10% -10% -10% -50px ;
+  margin: -10% -10% -10% -50px;
 }
 
 .dygraph-y2label {

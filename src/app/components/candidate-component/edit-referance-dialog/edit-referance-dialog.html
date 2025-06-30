@@ -1,104 +1,121 @@
-<h1 mat-dialog-title>Edit Candidate Referance</h1>
+<h1 mat-dialog-title>Edit Candidate Reference</h1>
 
-<mat-dialog-content>
-    <form [formGroup]="editReferanceForm" style="height: 700px; width: 850px; font-size: 0.95rem">
-        <mat-divider></mat-divider>
-        <br>
-        <mat-form-field>
-            <mat-label>Company Name</mat-label>
-            <input matInput formControlName="compName" id="compName" required autocomplete="off" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Job Description</mat-label>
-            <input matInput formControlName="jobDescription" placeholder="Job Description" name="jobDescription"
-                id="jobDescription" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Company Status</mat-label>
-            <mat-select placeholder="Status" formControlName="companyStatus" required name="companyStatus"
-                id="companyStatus">
-                @for (element of compStatusList; track element){
-                <mat-option [value]="element">
-                    {{element.statusName}}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Candidate Status</mat-label>
-            <mat-select placeholder="Status" formControlName="candidateStatus" required>
-                @for (element of candidateStatusList; track element){
-                <mat-option [value]="element">
-                    {{ element.statusName }}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Interview Availability</mat-label>
-            <input matInput formControlName="interviewAvailability" placeholder="Interview Availability"
-                name="interviewAvailability" id="interviewAvailability" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Interview Date</mat-label>
-            <input matInput formControlName="interviewDate" placeholder="Interview Date" name="interviewDate"
-                id="interviewDate" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Interview Time</mat-label>
-            <input matInput formControlName="interviewTime" placeholder="Interview Time" name="interviewTime"
-                id="interviewTime" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Offerd CTC</mat-label>
-            <input matInput formControlName="offeredCtc" placeholder="Offered CTC" name="offeredCtc" id="offeredCtc"
-                type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Joined Status</mat-label>
-            <input matInput formControlName="joinedStatus" placeholder="Joined Status" name="joinedStatus"
-                id="joinedStatus" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Joined Date</mat-label>
-            <input matInput formControlName="joinedDate" placeholder="Joined Date" name="joinedDate" id="joinedDate"
-                type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Effective Date</mat-label>
-            <input matInput formControlName="effectiveDate" placeholder="Effective Date" name="effectiveDate"
-                id="effectiveDate" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>Expiration Date</mat-label>
-            <input matInput formControlName="expirationDate" placeholder="Expiration Date" name="expirationDate"
-                id="expirationDate" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-            <mat-label>comments</mat-label>
-            <input matInput formControlName="comments" placeholder="Comments" name="comments" id="comments" type="text">
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;
+<mat-dialog-content class="container" style="max-height: 70vh; overflow: auto;">
+
+    <form [formGroup]="editReferanceForm" class="needs-validation">
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput formControlName="compName" required autocomplete="off" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Job Description</mat-label>
+                    <input matInput formControlName="jobDescription" autocomplete="off" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Company Status</mat-label>
+                    <mat-select formControlName="companyStatus" required>
+                        @for (element of compStatusList; track element) {
+                        <mat-option [value]="element">{{ element.statusName }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Candidate Status</mat-label>
+                    <mat-select formControlName="candidateStatus" required>
+                        @for (element of candidateStatusList; track element) {
+                        <mat-option [value]="element">{{ element.statusName }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Interview Availability</mat-label>
+                    <input matInput formControlName="interviewAvailability" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Interview Date</mat-label>
+                    <input matInput formControlName="interviewDate" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Interview Time</mat-label>
+                    <input matInput formControlName="interviewTime" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Offered CTC</mat-label>
+                    <input matInput formControlName="offeredCtc" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Joined Status</mat-label>
+                    <input matInput formControlName="joinedStatus" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Joined Date</mat-label>
+                    <input matInput formControlName="joinedDate" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Effective Date</mat-label>
+                    <input matInput formControlName="effectiveDate" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Expiration Date</mat-label>
+                    <input matInput formControlName="expirationDate" type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Comments</mat-label>
+                    <input matInput formControlName="comments" type="text" />
+                </mat-form-field>
+            </div>
+        </div>
     </form>
 </mat-dialog-content>
 
-<br>
-
 <mat-divider></mat-divider>
-<mat-dialog-actions align="end">
-    <!-- <button mat-raised-button (click)="copyToNew()">Copy to New</button> -->
+
+<mat-dialog-actions align="end" class="px-3 py-2">
     <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button color="primary" (click)="save()">Save</button>
 </mat-dialog-actions>

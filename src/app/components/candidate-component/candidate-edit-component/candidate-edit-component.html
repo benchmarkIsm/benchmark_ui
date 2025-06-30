@@ -1,137 +1,184 @@
-<div fxFlex fxLayout="column" fxLayoutGap="100px">
-    <br>
-    &nbsp;&nbsp;&nbsp;
-    <div fxFlex fxLayout.xs="column">
-        &nbsp;&nbsp;&nbsp;
-        <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/candidate']">Back to
-            Candidates
-        </button>
-        &nbsp;&nbsp;&nbsp;
-        <button matButton="elevated" color="primary" class="select-button" [disabled]="!isFormValid"
-            (click)="saveCandidate()">{{ buttonText }}
-        </button>
-    </div>
-    &nbsp;&nbsp;&nbsp;
-    <div>
-        <form [formGroup]="formName">
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-label>Search Candidate</mat-label>
-            <mat-divider></mat-divider>
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Phone</mat-label>
-                <input matInput formControlName="phoneSearch" placeholder="Phone" autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="emailSearch" placeholder="Phone" autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <button matButton="elevated" color="primary" class="select-button" (click)="search()">Search
+<div class="container py-4">
+    <!-- Buttons -->
+    <div class="row mb-3">
+        <div class="col-auto">
+            <button mat-button color="primary" class="btn btn-primary" [routerLink]="['/candidate']">
+                Back to Candidates
             </button>
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-label>Candidate Details</mat-label>
-            <mat-divider></mat-divider>
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="candidateName" placeholder="Candidate Name" required autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Phone</mat-label>
-                <input matInput formControlName="phoneNo" placeholder="Phone" required autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" placeholder="Email" required autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Position</mat-label>
-                <input matInput formControlName="position" placeholder="Position" required autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>primarySkill</mat-label>
-                <input matInput formControlName="primarySkill" placeholder="primarySkill" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>secondarySkill</mat-label>
-                <input matInput formControlName="secondarySkill" placeholder="secondarySkill" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-label>Current Details</mat-label>
-            <mat-divider></mat-divider>
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>CurrentLocation</mat-label>
-                <input matInput formControlName="currentLocation" placeholder="Current Location" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Current Company</mat-label>
-                <input matInput formControlName="currentCompany" placeholder="Current Company" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>noticePeriod</mat-label>
-                <input matInput formControlName="noticePeriod" placeholder="noticePeriod" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>reasonForChange</mat-label>
-                <input matInput formControlName="reasonForChange" placeholder="reasonForChange" autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>readyToRelocate</mat-label>
-                <select matNativeControl formControlName="readyToRelocate">
-                    <option value=1 selected>Yes</option>
-                    <option value=0>No</option>
-                </select>
-            </mat-form-field>
-
-            <br>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>totalExp</mat-label>
-                <input matInput formControlName="totalExp" placeholder="totalExp" required autocomplete="off"
-                    type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>releventExp</mat-label>
-                <input matInput formControlName="releventExp" placeholder="releventExp" autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>currentCtc</mat-label>
-                <input matInput formControlName="currentCtc" placeholder="currentCtc" autocomplete="off" type="text">
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>expectedCtc</mat-label>
-                <input matInput formControlName="expectedCtc" placeholder="expectedCtc" autocomplete="off" type="text">
-            </mat-form-field>
-        </form>
-        <app-candidate-refer [candidateData]="candidateInfo"></app-candidate-refer>
+        </div>
+        <div class="col-auto">
+            <button mat-button color="primary" class="btn btn-primary" [disabled]="!isFormValid"
+                (click)="saveCandidate()">
+                {{ buttonText }}
+            </button>
+        </div>
     </div>
+
+    <form [formGroup]="formName" class="needs-validation">
+        <!-- Search Section -->
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label fw-bold">Search Candidate</label>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phoneSearch" placeholder="Phone" autocomplete="off" type="text" />
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="emailSearch" placeholder="Email" autocomplete="off" type="text" />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-auto">
+                <button mat-button color="primary" class="btn btn-primary" (click)="search()">Search</button>
+            </div>
+        </div>
+
+        <!-- Candidate Details -->
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label fw-bold">Candidate Details</label>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="candidateName" placeholder="Candidate Name" required
+                        autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phoneNo" placeholder="Phone" required autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="Email" required autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Position</mat-label>
+                    <input matInput formControlName="position" placeholder="Position" required autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Primary Skill</mat-label>
+                    <input matInput formControlName="primarySkill" placeholder="Primary Skill" autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Secondary Skill</mat-label>
+                    <input matInput formControlName="secondarySkill" placeholder="Secondary Skill" autocomplete="off" />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Current Details -->
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label fw-bold">Current Details</label>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Current Location</mat-label>
+                    <input matInput formControlName="currentLocation" placeholder="Current Location"
+                        autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Current Company</mat-label>
+                    <input matInput formControlName="currentCompany" placeholder="Current Company" autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Notice Period</mat-label>
+                    <input matInput formControlName="noticePeriod" placeholder="Notice Period" autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Reason for Change</mat-label>
+                    <input matInput formControlName="reasonForChange" placeholder="Reason for Change"
+                        autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Ready to Relocate</mat-label>
+                    <select matNativeControl formControlName="readyToRelocate" class="form-select">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Experience & CTC -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Total Exp</mat-label>
+                    <input matInput formControlName="totalExp" placeholder="Total Exp" required autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Relevant Exp</mat-label>
+                    <input matInput formControlName="releventExp" placeholder="Relevant Exp" autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Current CTC</mat-label>
+                    <input matInput formControlName="currentCtc" placeholder="Current CTC" autocomplete="off" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Expected CTC</mat-label>
+                    <input matInput formControlName="expectedCtc" placeholder="Expected CTC" autocomplete="off" />
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+    <!-- Candidate Refer Component -->
+    <app-candidate-refer [candidateData]="candidateInfo"></app-candidate-refer>
 </div>

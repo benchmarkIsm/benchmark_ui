@@ -1,7 +1,13 @@
-<header></header>
-<mat-card class="example-card" appearance="outlined">
+<mat-card class="dashboard-card mat-elevation-z2">
     <mat-card-header>
-        Company and Job descriptions
+        <mat-card-title>Company and Job Descriptions</mat-card-title>
     </mat-card-header>
-    <app-company-tree></app-company-tree>
+
+    <hr class="card-separator" />
+
+    <mat-card-content>
+        <div class="tree-wrapper">
+            <app-company-tree></app-company-tree>
+        </div>
+    </mat-card-content>
 </mat-card>

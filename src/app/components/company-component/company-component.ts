@@ -67,7 +67,6 @@ export class CompanyComponent implements OnInit {
       data: companyToEdit,
       disableClose: true,
       autoFocus: false,
-      //width: '300px'
     });
 
     dialogRef.afterClosed().subscribe((saved) => {

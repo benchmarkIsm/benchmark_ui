@@ -22,7 +22,11 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/custom-theme.scss", "src/styles.css"]
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/custom-theme.scss",
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
