@@ -1,15 +1,9 @@
 <div fxFlex fxLayout="column" fxLayoutGap="100px">
 
-    <!-- Add new machine -->
-    <br>
-    <br>
-
     <div fxFlex fxLayout.xs="column">
-        &nbsp;&nbsp;&nbsp;
         <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/candidateDetails']">Add
             Candidate</button>
     </div>
-    <br>
     <br>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

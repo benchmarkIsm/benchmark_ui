@@ -1,62 +1,20 @@
-<mat-toolbar class="mat-elevation-z6 app-toolbar" fxLayout="row" fxFlex="100">
-    <div>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-            <!-- <mat-icon svgIcon="menu_icon"></mat-icon> -->
-            <mat-icon fontIcon="menu_icon"></mat-icon>
+<mat-toolbar class="mat-elevation-z6 app-toolbar">
+    <button mat-icon-button (click)="toggleMenu.emit()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <img src="../../../assets/img/BENCHMARK-logo.png" id="logo" />
+
+    <span class="spacer"></span>
+
+    <!-- User avatar + menu -->
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
         </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/dashboard">
-                <mat-icon aria-hidden="false" aria-label="Example home icon"
-                    fontIcon="face_retouching_natural"></mat-icon>
-                <span>Dashboard</span>
-            </button>
-            <button mat-menu-item [routerLink]="['/company']">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home_icon"></mat-icon>
-                <span>Company</span>
-            </button>
-            <button mat-menu-item routerLink="/jobDesciption">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="art_track"></mat-icon>
-                <span>Job Description</span>
-            </button>
-            <button mat-menu-item routerLink="/candidate">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person_search"></mat-icon>
-                <span>Candidate</span>
-            </button>
-            <button mat-menu-item routerLink="/status">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-                <span>Status</span>
-            </button>
-            <!-- <button mat-menu-item routerLink="/machine-editor">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="logout"></mat-icon>
-                <span>Logout</span>
-            </button> -->
-        </mat-menu>
-    </div>
-    <div>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <img src="../../../assets/img/BENCHMARK-logo.png" id="logo">
-    </div>
-
-    <!-- <div fxFlex="740px" style="text-align: center;">
-        <span class="title screen-only" fxHide.xs></span> Test <span class="header-subtitle"> Test</span>
-    </div>
-
-    <div fxFlex="740px" fxHide.sm fxHide.xs>
-        &nbsp;
-    </div>
-
-    <div fxFlex="130px">
-        <span class="header-user">Anand</span>
-        <button mat-icon-button>
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-        </button>
-
-    </div> -->
-
-
+    </mat-menu>
 </mat-toolbar>

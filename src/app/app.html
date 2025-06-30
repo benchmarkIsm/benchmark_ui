@@ -1,2 +1,22 @@
-<app-header [hidden]="!showHeader"></app-header>
-<router-outlet></router-outlet>
+<!-- Header and Sidenav -->
+<app-header *ngIf="showHeader" (toggleMenu)="toggleSidenav()"></app-header>
+
+<mat-sidenav-container *ngIf="showHeader" class="main-layout-container">
+    <mat-sidenav #sidenav [(opened)]="sidenavOpened" mode="side" class="main-sidenav">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+            <a mat-list-item routerLink="/company" routerLinkActive="active-link">Company</a>
+            <a mat-list-item routerLink="/jobDesciption" routerLinkActive="active-link">Job Description</a>
+            <a mat-list-item routerLink="/candidate" routerLinkActive="active-link">Candidate</a>
+            <a mat-list-item routerLink="/status" routerLinkActive="active-link">Status</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Show login page separately -->
+<router-outlet *ngIf="!showHeader"></router-outlet>

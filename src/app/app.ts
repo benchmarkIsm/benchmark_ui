@@ -1,32 +1,52 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
-import { Header } from './components/header/header';
+import {
+  RouterOutlet,
+  RouterModule,
+  Router,
+  NavigationEnd,
+} from '@angular/router';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { CompanyComponent } from './components/company-component/company-component';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+
+import { Header } from './components/header/header';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
+    RouterModule,
     RouterOutlet,
-    Header,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    Header,
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrls: ['./app.css'],
 })
 export class App {
-  protected title = 'benchmark-project';
-  showHeader: boolean;
+  sidenavOpened = true;
+  showHeader = false;
+
   constructor(
     matIconRegistry: MatIconRegistry,
     domSanitizer: DomSanitizer,
     private router: Router
   ) {
+    // Register icons
     matIconRegistry.addSvgIcon(
       'menu_icon',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/menu.svg')
@@ -36,10 +56,15 @@ export class App {
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/edit.svg')
     );
 
-    if (this.router.url == '/login') {
-      this.showHeader = false;
-    } else {
-      this.showHeader = true;
-    }
+    // Use route change to set header visibility
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.showHeader = !event.urlAfterRedirects.startsWith('/login');
+      });
+  }
+
+  toggleSidenav() {
+    this.sidenavOpened = !this.sidenavOpened;
   }
 }

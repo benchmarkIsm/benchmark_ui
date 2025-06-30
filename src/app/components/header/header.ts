@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MaterialModule } from '../../material/material-module';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +8,14 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {}
+export class Header {
+  @Output() toggleMenu = new EventEmitter<void>();
+
+  constructor(private router: Router) {}
+
+  logout() {
+    // Clear session/local storage if needed
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+}

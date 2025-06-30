@@ -1,0 +1,24 @@
+/* Main layout adjusts for fixed header */
+.main-layout-container {
+  margin-top: 64px; /* height of mat-toolbar */
+  height: calc(100vh - 64px);
+}
+
+/* Optional sidenav width */
+.main-sidenav {
+  width: 240px;
+  background-color: #f7f7f7;
+}
+
+/* Padding for page content */
+.main-content {
+  padding: 24px;
+}
+
+/* Highlight active link */
+.active-link {
+  border-left: 2px solid rgba(45, 26, 150, 0.959);
+  background-color: #b0b3b3 !important;
+  font-weight: 500;
+  color: #010706 !important;
+}

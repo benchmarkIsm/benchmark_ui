@@ -1,13 +1,9 @@
 <div fxFlex fxLayout="column" fxLayoutGap="25px">
 
-    <br>
-    <br>
     <div fxFlex fxLayout.xs="column">
-        &nbsp;&nbsp;&nbsp;
         <button matButton="elevated" color="primary" class="select-button">Add
             Status</button>
     </div>
-    <br>
     <br>
 
     <table mat-table [dataSource]="dataSource" [hidden]="dataSource.data.length==0">
