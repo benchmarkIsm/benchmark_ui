@@ -16,6 +16,7 @@ import {
 import { CompanyModel } from '../../models/company.model';
 import { CompanyService } from '../../services/company.service';
 import { CompanyEditDioloag } from './company-edit-dioloag/company-edit-dioloag';
+import { CompanyMouComponent } from './company-mou/company-mou';
 
 @Component({
   selector: 'app-company-component',
@@ -43,7 +44,7 @@ export class CompanyComponent implements OnInit {
     'contactPersonPhone',
     'contactPersonEmail',
     'status',
-    'edit_action',
+    'actions',
   ];
 
   constructor(
@@ -87,6 +88,14 @@ export class CompanyComponent implements OnInit {
       if (saved) {
         this.ngOnInit();
       }
+    });
+  }
+
+  openDialogForCompanyMou() {
+    this.dialog.open(CompanyMouComponent, {
+      disableClose: true,
+      autoFocus: false,
+      width: '60vw',
     });
   }
 }

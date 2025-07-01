@@ -14,24 +14,33 @@ export default class CompanyTreeService {
         companyMap[compName] = {
           id: jd.company.compCode,
           name: compName,
+          description: compName,
           route: '/company',
           children: [],
         };
       }
-
       // Filter candidates belonging to this JD
       const jdCandidates = candidates
         .filter((c) => c.jdId.jdId === jdId)
-        .map((c) => ({
-          id: c.bssId.bssId,
-          name: c.bssId.candidateName.trim(),
-          route: '/candidate',
-          children: [],
-        }));
+        .map((c) => {
+          return {
+            id: c.bssId.bssId,
+            name: c.bssId.candidateName.trim(),
+            description:
+              'Company Status: ' +
+              c.companyStatus +
+              ' | Candidate Status: ' +
+              c.candidateStatus +
+              (c.interviewDate ? ' | Interview Date: ' + c.interviewDate : ''),
+            route: '/candidate',
+            children: [],
+          };
+        });
 
       const jdNode = {
         id: jdId,
         name: jobTitle,
+        description: jobTitle,
         route: '/jobDescription',
         children: jdCandidates,
       };

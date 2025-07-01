@@ -15,7 +15,7 @@
                 <mat-icon class="node-icon">person</mat-icon>
             </ng-template>
 
-            <span class="node-text">{{ node.name }}</span>
+            <span class="node-text" title={{node.description}}>{{ node.name }}</span>
         </div>
 
         <div *ngIf="hasChild(0, node) && treeControl.isExpanded(node)">

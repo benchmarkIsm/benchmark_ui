@@ -1,20 +1,22 @@
 <div fxFlex fxLayout="column" fxLayoutGap="100px">
 
     <div fxFlex fxLayout.xs="column">
-        <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/candidateDetails']">Add
-            Candidate</button>
+        <button mat-raised-button color="primary" class="select-button" [routerLink]="['/candidateDetails']">
+            Add Candidate
+        </button>
     </div>
-    <br>
+    <br />
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+        <!-- Candidate Columns -->
         <ng-container matColumnDef="candidateName">
             <th mat-header-cell *matHeaderCellDef>Candidate Name</th>
-            <td mat-cell *matCellDef="let element" class='card-title'>{{element.candidateName}}</td>
+            <td mat-cell *matCellDef="let element" class="card-title">{{ element.candidateName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="phoneNo">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
-            <td mat-cell *matCellDef="let element">{{element.phoneNo}}</td>
+            <td mat-cell *matCellDef="let element">{{ element.phoneNo }}</td>
         </ng-container>
 
         <ng-container matColumnDef="email">
@@ -42,9 +44,9 @@
             <td mat-cell *matCellDef="let element">{{ element.currentCtc }}</td>
         </ng-container>
 
-
+        <!-- Actions Column -->
         <ng-container matColumnDef="edit_action">
-            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button class="screen-only">
                     <mat-icon svgIcon="edit_icon" [routerLink]="['/candidateDetails']" [state]="element"></mat-icon>
@@ -52,7 +54,12 @@
             </td>
         </ng-container>
 
+        <!-- Table Rows -->
         <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
+
+    <!-- Mat Paginator -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 15, 25]" showFirstLastButtons></mat-paginator>
+
 </div>

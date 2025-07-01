@@ -226,3 +226,9 @@ input[type="number"] {
 .light_uv svg {
   fill: rgb(154, 0, 192);
 }
+
+::ng-deep mat-paginator {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,13 +13,14 @@ import {
   MatHeaderCellDef,
   MatColumnDef,
 } from '@angular/material/table';
-
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { CandidateInfoModel } from '../../models/candidate-info.module';
 import { CandidateService } from '../../services/candidate.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-candidate-component',
+  standalone: true,
   imports: [
     MatButtonModule,
     MatDividerModule,
@@ -32,6 +33,7 @@ import { RouterModule } from '@angular/router';
     MatHeaderCellDef,
     MatColumnDef,
     RouterModule,
+    MatPaginatorModule,
   ],
   templateUrl: './candidate-component.html',
   styleUrl: './candidate-component.css',
@@ -49,6 +51,7 @@ export class CandidateComponent implements OnInit {
     'currentCtc',
     'edit_action',
   ];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private candidateService: CandidateService,
@@ -58,6 +61,7 @@ export class CandidateComponent implements OnInit {
   async ngOnInit() {
     await this.getCandidateList();
     this.dataSource = new MatTableDataSource(this.candidateBasinInfo);
+    this.dataSource.paginator = this.paginator;
     this.cdr.detectChanges();
   }
 
