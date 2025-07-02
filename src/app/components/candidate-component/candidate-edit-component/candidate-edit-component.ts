@@ -1,33 +1,28 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MaterialModule } from '../../../material/material-module';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
+  AbstractControl,
 } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { NotificationService } from '../../../services/notification.service';
-import { CandidateInfoModel } from '../../../models/candidate-info.module';
-import { CandidateService } from '../../../services/candidate.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 
-import { CompanyModel } from '../../../models/company.model';
-import { CompanyService } from '../../../services/company.service';
-import { JobDescriptionModel } from '../../../models/job-description.model';
-import { JobDescriptionService } from '../../../services/job-description.service';
-import { StatusModel } from '../../../models/status.model';
-import { StatusService } from '../../../services/status.service';
-import { CandidateReferanceInfoModel } from '../../../models/candidate-referance-info.model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MaterialModule } from '../../../material/material-module';
+import { NotificationService } from '../../../services/notification.service';
+import { CandidateService } from '../../../services/candidate.service';
+import { CandidateInfoModel } from '../../../models/candidate-info.module';
 import { CandidateReferComponent } from '../candidate-refer/candidate-refer';
 
 @Component({
   selector: 'app-candidate-edit-component',
+  standalone: true,
   imports: [
     MatButtonModule,
     MatDividerModule,
@@ -42,55 +37,55 @@ import { CandidateReferComponent } from '../candidate-refer/candidate-refer';
   styleUrl: './candidate-edit-component.css',
 })
 export class CandidateEditComponent implements OnInit {
-  formName: FormGroup;
+  searchForm: FormGroup;
+  candidateForm: FormGroup;
+
   buttonText = 'Create Candidate';
   isNewCandidate = true;
-  candidateInfo: CandidateInfoModel = new CandidateInfoModel();
-  formSubscription: Subscription;
-  isFormValid = false;
+  showCandidateForm = false;
 
-  company: CompanyModel[] = [];
-  status: StatusModel[] = [];
-  positionStatus: StatusModel[] = [];
-  positionUrgency: StatusModel[] = [];
-  jobDescription: JobDescriptionModel[] = [];
-  candidateReferanceinfo: CandidateReferanceInfoModel[] = [];
+  candidateInfo: CandidateInfoModel = new CandidateInfoModel();
+  isFormValid = false;
+  formSubscription: Subscription;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private notifier: NotificationService,
     private route: ActivatedRoute,
     private candidateService: CandidateService
   ) {}
 
-  async ngOnInit() {
-    this.initForm();
+  ngOnInit() {
+    this.initForms();
 
     this.route.paramMap
       .pipe(map(() => window.history.state))
       .subscribe((res) => {
         this.candidateInfo = res;
         if (this.candidateInfo?.bssId != null) {
-          this.buttonText = 'Update Candidate';
           this.isNewCandidate = false;
+          this.buttonText = 'Update Candidate';
+          this.showCandidateForm = true;
+          this.setupCandidateForm();
+          this.updateValidity();
         }
       });
 
-    if (!this.isNewCandidate) {
-      this.setupForm();
-      this.updateValidity();
-    }
-
-    // Use valueChanges instead of statusChanges for more accurate tracking
-    this.formSubscription = this.formName.valueChanges.subscribe(() => {
-      this.isFormValid = this.formName.valid;
+    this.formSubscription = this.candidateForm.valueChanges.subscribe(() => {
+      this.isFormValid = this.candidateForm.valid;
     });
   }
 
-  private initForm() {
-    this.formName = this.formBuilder.group({
-      phoneSearch: [''],
-      emailSearch: [''],
+  private initForms() {
+    this.searchForm = this.fb.group(
+      {
+        phoneSearch: [''],
+        emailSearch: [''],
+      },
+      { validators: this.atLeastOneValidator }
+    );
+
+    this.candidateForm = this.fb.group({
       candidateName: ['', Validators.required],
       phoneNo: ['', Validators.required],
       position: [''],
@@ -111,85 +106,72 @@ export class CandidateEditComponent implements OnInit {
     });
   }
 
-  private setupForm() {
-    this.formName.patchValue({
-      phoneSearch: '',
-      emailSearch: '',
-      candidateName: this.candidateInfo.candidateName,
-      phoneNo: this.candidateInfo.phoneNo,
-      position: this.candidateInfo.position,
-      email: this.candidateInfo.email,
-      primarySkill: this.candidateInfo.primarySkill,
-      secondarySkill: this.candidateInfo.secondarySkill,
-      resume: this.candidateInfo.resume,
-      dob: this.candidateInfo.dob,
-      currentLocation: this.candidateInfo.currentLocation,
-      currentCompany: this.candidateInfo.currentCompany,
-      noticePeriod: this.candidateInfo.noticePeriod,
-      totalExp: this.candidateInfo.totalExp,
-      releventExp: this.candidateInfo.releventExp,
-      currentCtc: this.candidateInfo.currentCtc,
-      expectedCtc: this.candidateInfo.expectedCtc,
-      reasonForChange: this.candidateInfo.reasonForChange,
-      readyToRelocate: this.candidateInfo.readyToRelocate,
-    });
+  private atLeastOneValidator(
+    group: AbstractControl
+  ): { [key: string]: any } | null {
+    const phone = group.get('phoneSearch')?.value;
+    const email = group.get('emailSearch')?.value;
+    return phone || email ? null : { required: true };
+  }
+
+  private setupCandidateForm() {
+    this.candidateForm.patchValue({ ...this.candidateInfo });
   }
 
   private updateValidity() {
-    this.formName.updateValueAndValidity();
-    this.isFormValid = this.formName.valid;
+    this.candidateForm.updateValueAndValidity();
+    this.isFormValid = this.candidateForm.valid;
   }
 
   async search() {
-    const phone = this.formName.get('phoneSearch')?.value;
-    const email = this.formName.get('emailSearch')?.value;
-
-    if (!phone && !email) {
+    if (this.searchForm.invalid) {
       this.notifier.showWarning(
-        'Need Phone or Email value to search',
+        'Either Phone or Email is required to search.',
         '',
         false
       );
       return;
     }
 
+    const phone = this.searchForm.get('phoneSearch')?.value;
+    const email = this.searchForm.get('emailSearch')?.value;
+
     const data = await this.candidateService.getCandidateByPhoneOrEmail(
       phone,
       email
     );
-    if (data != null) {
+    if (data) {
       this.candidateInfo = data;
-      this.buttonText = 'Update Candidate';
       this.isNewCandidate = false;
-      this.setupForm();
-      this.updateValidity();
+      this.buttonText = 'Update Candidate';
+      this.setupCandidateForm();
     } else {
-      this.notifier.showInfo('No candidate found', '', false);
+      this.candidateInfo = new CandidateInfoModel();
+      this.candidateInfo.phoneNo = phone;
+      this.candidateInfo.email = email;
+      this.candidateForm.reset();
+      this.candidateForm.patchValue({
+        phoneNo: phone,
+        email: email,
+      });
+      this.buttonText = 'Create Candidate';
     }
+
+    this.showCandidateForm = true;
+    this.updateValidity();
+  }
+
+  resetToSearch() {
+    this.showCandidateForm = false;
+    this.isNewCandidate = true;
+    this.searchForm.reset();
+    this.candidateForm.reset();
+    this.candidateInfo = new CandidateInfoModel();
   }
 
   async saveCandidate() {
-    const formValue = this.formName.value;
-
-    Object.assign(this.candidateInfo, {
-      candidateName: formValue.candidateName,
-      phoneNo: formValue.phoneNo,
-      position: formValue.position,
-      email: formValue.email,
-      primarySkill: formValue.primarySkill,
-      secondarySkill: formValue.secondarySkill,
-      resume: formValue.resume,
-      dob: formValue.dob,
-      currentLocation: formValue.currentLocation,
-      currentCompany: formValue.currentCompany,
-      noticePeriod: formValue.noticePeriod,
-      totalExp: formValue.totalExp,
-      releventExp: formValue.releventExp,
-      currentCtc: formValue.currentCtc,
-      expectedCtc: formValue.expectedCtc,
-      reasonForChange: formValue.reasonForChange,
-      readyToRelocate: formValue.readyToRelocate,
-    });
+    const formValue = this.candidateForm.value;
+    Object.assign(this.candidateInfo, formValue);
 
     try {
       await this.candidateService.saveCandidateData(this.candidateInfo);
@@ -201,7 +183,7 @@ export class CandidateEditComponent implements OnInit {
       );
     } catch (error) {
       this.notifier.showWarning(
-        `Error in creating/updating Candidate ${this.candidateInfo.candidateName}`,
+        `Error in saving Candidate ${this.candidateInfo.candidateName}`,
         '',
         false
       );
