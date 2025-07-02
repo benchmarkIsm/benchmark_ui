@@ -1,35 +1,36 @@
-<div fxFlex fxLayout="column" fxLayoutGap="100px">
-
-    <div fxFlex fxLayout.xs="column">
-        <button matButton="elevated" color="primary" class="select-button" [routerLink]="['/jdDetails']">Add
-            Job</button>
+<mat-card class="p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Job Descriptions</h3>
+        <button mat-flat-button color="primary" [routerLink]="['/jdDetails']">
+            <mat-icon class="me-1">add</mat-icon>
+            Add Job
+        </button>
     </div>
 
-    <br>
-    <table mat-table [dataSource]=" dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
         <ng-container matColumnDef="compid">
-            <th mat-header-cell *matHeaderCellDef>Company Code</th>
-            <td mat-cell *matCellDef="let element" class='card-title'>{{element.company.compName}}</td>
+            <th mat-header-cell *matHeaderCellDef>Company Name</th>
+            <td mat-cell *matCellDef="let element" class="card-title">{{ element.company.compName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="jobPositionTitle">
             <th mat-header-cell *matHeaderCellDef>Job Position Title</th>
-            <td mat-cell *matCellDef="let element">{{element.jobPositionTitle}}</td>
+            <td mat-cell *matCellDef="let element">{{ element.jobPositionTitle }}</td>
         </ng-container>
 
         <ng-container matColumnDef="positionStatus">
             <th mat-header-cell *matHeaderCellDef>Position Status</th>
-            <td mat-cell *matCellDef="let element">{{element.positionStatus}}</td>
+            <td mat-cell *matCellDef="let element">{{ element.positionStatus }}</td>
         </ng-container>
 
         <ng-container matColumnDef="urgencyStatus">
             <th mat-header-cell *matHeaderCellDef>Urgency</th>
-            <td mat-cell *matCellDef="let element">{{element.positionUrgency}}</td>
+            <td mat-cell *matCellDef="let element">{{ element.positionUrgency }}</td>
         </ng-container>
 
         <ng-container matColumnDef="experienceFrom">
-            <th mat-header-cell *matHeaderCellDef>Exp from</th>
+            <th mat-header-cell *matHeaderCellDef>Exp From</th>
             <td mat-cell *matCellDef="let element">{{ element.experienceFrom }}</td>
         </ng-container>
 
@@ -38,9 +39,8 @@
             <td mat-cell *matCellDef="let element">{{ element.experienceTo }}</td>
         </ng-container>
 
-
         <ng-container matColumnDef="edit_action">
-            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button class="screen-only">
                     <mat-icon svgIcon="edit_icon" [routerLink]="['/jdDetails']" [state]="element"></mat-icon>
@@ -48,10 +48,9 @@
             </td>
         </ng-container>
 
-
-
-
         <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
-</div>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-card>

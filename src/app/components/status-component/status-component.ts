@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog } from '@angular/material/dialog';
+import { MatCard } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatTableModule,
@@ -13,6 +13,7 @@ import {
   MatHeaderCellDef,
   MatColumnDef,
 } from '@angular/material/table';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { StatusModel } from '../../models/status.model';
 import { StatusService } from '../../services/status.service';
 
@@ -23,7 +24,10 @@ import { StatusService } from '../../services/status.service';
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatCard,
     MatTable,
+    MatPaginator,
+    MatPaginatorModule,
     MatRowDef,
     MatHeaderRowDef,
     MatCellDef,
@@ -37,12 +41,16 @@ export class StatusComponent {
   status: StatusModel[] = [];
   dataSource: MatTableDataSource<StatusModel>;
   tableColumns: string[] = ['statusName', 'generatedFor', 'edit_action'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private statusService: StatusService,
-    private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    private cdr: ChangeDetectorRef
   ) {}
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   async ngOnInit() {
     await this.getCompanyList();

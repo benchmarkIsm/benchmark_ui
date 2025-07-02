@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCard } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatTableModule,
@@ -25,6 +26,7 @@ import { CompanyMouComponent } from './company-mou/company-mou';
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatCard,
     MatTable,
     MatRowDef,
     MatHeaderRowDef,
@@ -81,7 +83,7 @@ export class CompanyComponent implements OnInit {
     const dialogRef = this.dialog.open(CompanyEditDioloag, {
       disableClose: true,
       autoFocus: false,
-      //width: '300px'
+      width: '70vw',
     });
 
     dialogRef.afterClosed().subscribe((saved) => {

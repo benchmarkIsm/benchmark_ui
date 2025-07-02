@@ -24,7 +24,8 @@ import { CandidateReferanceInfoModel } from '../../../models/candidate-referance
 import { NgForOf } from '@angular/common';
 import { NotificationService } from '../../../services/notification.service';
 import { EditReferanceDialog } from '../edit-referance-dialog/edit-referance-dialog';
-
+import { CandidateReferanceInfoModelAll } from '../../../models/candidate-referance-info-all.model';
+import { CoreService } from '../../../services/core-api.service';
 export interface CandidateReferanceInfo extends CandidateReferanceInfoModel {
   compName: string;
   jobDescription: string;
@@ -56,6 +57,7 @@ export class CandidateReferComponent implements OnInit {
   positionUrgency: StatusModel[] = [];
   jobDescription: JobDescriptionModel[] = [];
   candidateReferanceinfo: CandidateReferanceInfo[] = [];
+  jd: JobDescriptionModel;
   referenceTableColumns: string[] = [
     'compName',
     'jobDescription',
@@ -72,7 +74,8 @@ export class CandidateReferComponent implements OnInit {
     private jobService: JobDescriptionService,
     private cdr: ChangeDetectorRef,
     private notifier: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private coreService: CoreService
   ) {}
 
   async ngOnInit() {
@@ -192,5 +195,28 @@ export class CandidateReferComponent implements OnInit {
 
   deleteReference(ref: any): void {
     // delete the selected reference
+  }
+
+  async sendMail(ref: CandidateReferanceInfo) {
+    const mailData = new CandidateReferanceInfoModelAll();
+    mailData.candidateRefId = ref;
+    mailData.bssId = this.candidateData;
+    mailData.jdId = this.getJobDetails(ref.jdId);
+
+    const value = await this.coreService.sendJobEmail(mailData);
+    if (value) {
+      this.notifier.showSuccess('Email sent successfully.', '', false);
+    } else {
+      this.notifier.showSuccess('Error in sending email.', '', false);
+    }
+  }
+
+  public getJobDetails(jdId: number): JobDescriptionModel {
+    for (let i = 0; i < this.jobDescription.length; i++) {
+      if (this.jobDescription[i].jdId == jdId) {
+        this.jd = this.jobDescription[i];
+      }
+    }
+    return this.jd;
   }
 }

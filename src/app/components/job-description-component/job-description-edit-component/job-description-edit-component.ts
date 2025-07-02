@@ -42,7 +42,7 @@ export class JobDescriptionEditComponent implements OnInit {
   positionStatus: StatusModel[] = [];
   positionUrgency: StatusModel[] = [];
   jobDescriptionObj: JobDescriptionModel;
-  buttonText = 'Create JD';
+  buttonText = 'Create';
   isNewJD = true;
 
   constructor(
@@ -61,7 +61,7 @@ export class JobDescriptionEditComponent implements OnInit {
         console.log(res);
         this.jobDescriptionObj = res;
         if (this.jobDescriptionObj.jdId != null) {
-          this.buttonText = 'Update JD';
+          this.buttonText = 'Update';
           this.isNewJD = false;
         }
       });

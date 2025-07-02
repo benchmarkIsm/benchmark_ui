@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="py-4">
     <form [formGroup]="referenceForm" class="needs-validation">
         <!-- Refer Candidate Header -->
         <div class="row mb-2">
@@ -10,7 +10,7 @@
 
         <!-- Company / Job / Status -->
         <div class="row g-3 mb-3">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Company</mat-label>
                     <mat-select formControlName="company" required (selectionChange)="onCompanyChange($event)">
@@ -21,7 +21,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Job</mat-label>
                     <mat-select formControlName="job" required>
@@ -32,7 +32,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName="status" required>
@@ -42,29 +42,29 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-        </div>
-
-        <!-- Refer Button -->
-        <div class="row mb-4">
-            <div class="col-auto">
-                <button mat-raised-button color="primary" class="btn btn-primary" [disabled]="btnReferDisabled"
-                    (click)="submitReference()">
+            <div class="col-md-3">
+                <button mat-raised-button color="primary" class="btn btn-primary" style="margin-top: 10px"
+                    [disabled]="btnReferDisabled" (click)="submitReference()">
                     Refer
                 </button>
             </div>
         </div>
 
-        <!-- Refer Details Header -->
-        <div class="row mb-2">
-            <div class="col">
-                <label class="form-label fw-bold">Refer Details</label>
-                <mat-divider></mat-divider>
-            </div>
-        </div>
+        <!-- Refer Button -->
+
+
+
     </form>
 
     <!-- Refer Table -->
     @if(candidateReferanceinfo.length) {
+    <!-- Refer Details Header -->
+    <div class="row mb-2">
+        <div class="col">
+            <label class="form-label fw-bold">Refer Details</label>
+            <mat-divider></mat-divider>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <table mat-table [dataSource]="candidateReferanceinfo" class="mat-elevation-z8 w-100">
@@ -102,6 +102,9 @@
                         </button>
                         <button mat-icon-button color="warn" aria-label="Delete" (click)="deleteReference(ref)">
                             <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" aria-label="Delete" (click)="sendMail(ref)">
+                            <mat-icon>mail</mat-icon>
                         </button>
                     </td>
                 </ng-container>

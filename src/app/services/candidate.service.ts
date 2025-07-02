@@ -31,6 +31,13 @@ export class CandidateService {
       .toPromise();
   }
 
+  async getCandidatesBasicInfoById(bssId: number): Promise<CandidateInfoModel> {
+    return await this.http
+      .get(this.dataAPI + 'candidate/byId' + bssId)
+      .pipe(map((data) => this.basicInfoAdapter.adapt(data)))
+      .toPromise();
+  }
+
   async getCandidateByPhoneOrEmail(
     phone: string,
     email: string

@@ -1,22 +1,22 @@
-<div fxFlex fxLayout="column" fxLayoutGap="100px">
-
-    <div fxFlex fxLayout.xs="column">
-        <button matButton="elevated" color="primary" class="select-button" (click)="openDialogForCompanyAdd()">Add
-            Company</button>
+<mat-card class="p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Company List</h3>
+        <button mat-flat-button color="primary" (click)="openDialogForCompanyAdd()">
+            <mat-icon class="me-1">add</mat-icon>
+            Add Company
+        </button>
     </div>
 
-    <br>
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
         <ng-container matColumnDef="compName">
             <th mat-header-cell *matHeaderCellDef>Company Name</th>
-            <td mat-cell *matCellDef="let element" class='card-title'>{{element.compName}}</td>
+            <td mat-cell *matCellDef="let element" class="card-title">{{ element.compName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="contactPersonName">
             <th mat-header-cell *matHeaderCellDef>Contact Person</th>
-            <td mat-cell *matCellDef="let element">{{element.contactPersonName}}</td>
+            <td mat-cell *matCellDef="let element">{{ element.contactPersonName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="contactPersonPhone">
@@ -34,9 +34,8 @@
             <td mat-cell *matCellDef="let element">{{ element.compStatus }}</td>
         </ng-container>
 
-
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button class="screen-only">
                     <mat-icon svgIcon="edit_icon" matTooltip="Edit role name"
@@ -49,10 +48,7 @@
             </td>
         </ng-container>
 
-
-
-
         <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
-</div>
+</mat-card>

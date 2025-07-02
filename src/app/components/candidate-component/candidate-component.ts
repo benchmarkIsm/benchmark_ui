@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog } from '@angular/material/dialog';
+import { MatCard } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatTableModule,
@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatCard,
     MatTable,
     MatRowDef,
     MatHeaderRowDef,
@@ -34,6 +35,7 @@ import { RouterModule } from '@angular/router';
     MatColumnDef,
     RouterModule,
     MatPaginatorModule,
+    MatPaginator,
   ],
   templateUrl: './candidate-component.html',
   styleUrl: './candidate-component.css',

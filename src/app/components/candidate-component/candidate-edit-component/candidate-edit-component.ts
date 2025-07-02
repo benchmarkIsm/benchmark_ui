@@ -19,13 +19,10 @@ import { map, Subscription } from 'rxjs';
 
 import { CompanyModel } from '../../../models/company.model';
 import { CompanyService } from '../../../services/company.service';
-
 import { JobDescriptionModel } from '../../../models/job-description.model';
 import { JobDescriptionService } from '../../../services/job-description.service';
-
 import { StatusModel } from '../../../models/status.model';
 import { StatusService } from '../../../services/status.service';
-
 import { CandidateReferanceInfoModel } from '../../../models/candidate-referance-info.model';
 import { CandidateReferComponent } from '../candidate-refer/candidate-refer';
 
@@ -48,15 +45,17 @@ export class CandidateEditComponent implements OnInit {
   formName: FormGroup;
   buttonText = 'Create Candidate';
   isNewCandidate = true;
-  candidateInfo: CandidateInfoModel;
+  candidateInfo: CandidateInfoModel = new CandidateInfoModel();
   formSubscription: Subscription;
   isFormValid = false;
+
   company: CompanyModel[] = [];
   status: StatusModel[] = [];
   positionStatus: StatusModel[] = [];
   positionUrgency: StatusModel[] = [];
   jobDescription: JobDescriptionModel[] = [];
   candidateReferanceinfo: CandidateReferanceInfoModel[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private notifier: NotificationService,
@@ -65,36 +64,37 @@ export class CandidateEditComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.init();
+    this.initForm();
 
     this.route.paramMap
       .pipe(map(() => window.history.state))
       .subscribe((res) => {
         this.candidateInfo = res;
-        if (this.candidateInfo.bssId != null) {
+        if (this.candidateInfo?.bssId != null) {
           this.buttonText = 'Update Candidate';
           this.isNewCandidate = false;
         }
       });
 
     if (!this.isNewCandidate) {
-      // await this.getCandidateReferanceData();
       this.setupForm();
+      this.updateValidity();
     }
 
-    this.formSubscription = this.formName.statusChanges.subscribe(() => {
+    // Use valueChanges instead of statusChanges for more accurate tracking
+    this.formSubscription = this.formName.valueChanges.subscribe(() => {
       this.isFormValid = this.formName.valid;
     });
   }
 
-  private init() {
+  private initForm() {
     this.formName = this.formBuilder.group({
       phoneSearch: [''],
       emailSearch: [''],
-      candidateName: [''],
-      phoneNo: [''],
+      candidateName: ['', Validators.required],
+      phoneNo: ['', Validators.required],
       position: [''],
-      email: [''],
+      email: ['', [Validators.required, Validators.email]],
       primarySkill: [''],
       secondarySkill: [''],
       resume: [''],
@@ -112,9 +112,9 @@ export class CandidateEditComponent implements OnInit {
   }
 
   private setupForm() {
-    this.formName.setValue({
-      phoneSearch: [''],
-      emailSearch: [''],
+    this.formName.patchValue({
+      phoneSearch: '',
+      emailSearch: '',
       candidateName: this.candidateInfo.candidateName,
       phoneNo: this.candidateInfo.phoneNo,
       position: this.candidateInfo.position,
@@ -135,74 +135,73 @@ export class CandidateEditComponent implements OnInit {
     });
   }
 
-  async search() {
-    const phone = this.formName.get('phoneSearch').value;
-    const email = this.formName.get('emailSearch').value;
+  private updateValidity() {
+    this.formName.updateValueAndValidity();
+    this.isFormValid = this.formName.valid;
+  }
 
-    if (phone == null && email == null) {
+  async search() {
+    const phone = this.formName.get('phoneSearch')?.value;
+    const email = this.formName.get('emailSearch')?.value;
+
+    if (!phone && !email) {
       this.notifier.showWarning(
-        'need Phone or  Email value to search',
+        'Need Phone or Email value to search',
         '',
         false
       );
+      return;
+    }
+
+    const data = await this.candidateService.getCandidateByPhoneOrEmail(
+      phone,
+      email
+    );
+    if (data != null) {
+      this.candidateInfo = data;
+      this.buttonText = 'Update Candidate';
+      this.isNewCandidate = false;
+      this.setupForm();
+      this.updateValidity();
     } else {
-      const data = await this.candidateService.getCandidateByPhoneOrEmail(
-        phone,
-        email
-      );
-      if (data != null) {
-        this.candidateInfo = data;
-        this.buttonText = 'Update Candidate';
-        this, this.setupForm();
-      } else {
-        this.notifier.showInfo('No candidate found', '', false);
-      }
+      this.notifier.showInfo('No candidate found', '', false);
     }
   }
 
   async saveCandidate() {
-    this.candidateInfo.candidateName = this.formName.get('candidateName').value;
-    this.candidateInfo.phoneNo = this.formName.get('phoneNo').value;
-    this.candidateInfo.position = this.formName.get('position').value;
-    this.candidateInfo.email = this.formName.get('email').value;
-    this.candidateInfo.primarySkill = this.formName.get('primarySkill').value;
-    this.candidateInfo.secondarySkill =
-      this.formName.get('secondarySkill').value;
-    this.candidateInfo.resume = this.formName.get('resume').value;
-    this.candidateInfo.dob = this.formName.get('dob').value;
-    this.candidateInfo.currentLocation =
-      this.formName.get('currentLocation').value;
-    this.candidateInfo.currentCompany =
-      this.formName.get('currentCompany').value;
-    this.candidateInfo.noticePeriod = this.formName.get('noticePeriod').value;
-    this.candidateInfo.totalExp = this.formName.get('totalExp').value;
-    this.candidateInfo.releventExp = this.formName.get('releventExp').value;
-    this.candidateInfo.currentCtc = this.formName.get('currentCtc').value;
-    this.candidateInfo.expectedCtc = this.formName.get('expectedCtc').value;
-    this.candidateInfo.reasonForChange =
-      this.formName.get('reasonForChange').value;
-    this.candidateInfo.readyToRelocate =
-      this.formName.get('readyToRelocate').value;
+    const formValue = this.formName.value;
+
+    Object.assign(this.candidateInfo, {
+      candidateName: formValue.candidateName,
+      phoneNo: formValue.phoneNo,
+      position: formValue.position,
+      email: formValue.email,
+      primarySkill: formValue.primarySkill,
+      secondarySkill: formValue.secondarySkill,
+      resume: formValue.resume,
+      dob: formValue.dob,
+      currentLocation: formValue.currentLocation,
+      currentCompany: formValue.currentCompany,
+      noticePeriod: formValue.noticePeriod,
+      totalExp: formValue.totalExp,
+      releventExp: formValue.releventExp,
+      currentCtc: formValue.currentCtc,
+      expectedCtc: formValue.expectedCtc,
+      reasonForChange: formValue.reasonForChange,
+      readyToRelocate: formValue.readyToRelocate,
+    });
 
     try {
       await this.candidateService.saveCandidateData(this.candidateInfo);
-      if (this.isNewCandidate) {
-        this.notifier.showSuccess(
-          'Created new Candidate ' + this.candidateInfo.candidateName,
-          '',
-          false
-        );
-      } else {
-        this.notifier.showSuccess(
-          'updated Candidate ' + this.candidateInfo.candidateName,
-          '',
-          false
-        );
-      }
+      const action = this.isNewCandidate ? 'Created new' : 'Updated';
+      this.notifier.showSuccess(
+        `${action} Candidate ${this.candidateInfo.candidateName}`,
+        '',
+        false
+      );
     } catch (error) {
       this.notifier.showWarning(
-        'Error in creating/updating Candidate ' +
-          this.candidateInfo.candidateName,
+        `Error in creating/updating Candidate ${this.candidateInfo.candidateName}`,
         '',
         false
       );

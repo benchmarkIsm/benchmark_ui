@@ -1,12 +1,13 @@
-<div fxFlex fxLayout="column" fxLayoutGap="100px">
-
-    <div fxFlex fxLayout.xs="column">
-        <button mat-raised-button color="primary" class="select-button" [routerLink]="['/candidateDetails']">
+<mat-card class="p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Candidate List</h3>
+        <button mat-flat-button color="primary" [routerLink]="['/candidateDetails']">
+            <mat-icon class="me-1">add</mat-icon>
             Add Candidate
         </button>
     </div>
-    <br />
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
         <!-- Candidate Columns -->
         <ng-container matColumnDef="candidateName">
@@ -61,5 +62,4 @@
 
     <!-- Mat Paginator -->
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 15, 25]" showFirstLastButtons></mat-paginator>
-
-</div>
+</mat-card>

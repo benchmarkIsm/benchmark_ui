@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog } from '@angular/material/dialog';
+import { MatCard } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatTableModule,
@@ -16,6 +16,7 @@ import {
 import { JobDescriptionModel } from '../../models/job-description.model';
 import { JobDescriptionService } from '../../services/job-description.service';
 import { RouterModule } from '@angular/router';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-job-description-component',
@@ -24,7 +25,9 @@ import { RouterModule } from '@angular/router';
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatPaginatorModule,
     MatTable,
+    MatCard,
     MatRowDef,
     MatHeaderRowDef,
     MatCellDef,
@@ -47,6 +50,7 @@ export class JobDescriptionComponent {
     'experienceTo',
     'edit_action',
   ];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private jdService: JobDescriptionService,
