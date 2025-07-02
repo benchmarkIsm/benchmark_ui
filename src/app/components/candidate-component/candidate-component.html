@@ -6,7 +6,15 @@
             Add Candidate
         </button>
     </div>
-
+    <div class="d-flex justify-content-end mb-3">
+        <mat-form-field appearance="outline" class="w-25">
+            <mat-label>Search Candidate</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Name, Phone, Email, Location, Position etc." />
+            <button mat-icon-button matSuffix *ngIf="dataSource.filter" (click)="clearFilter()" aria-label="Clear">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
         <!-- Candidate Columns -->

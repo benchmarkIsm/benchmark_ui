@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCard } from '@angular/material/card';
+
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatTableModule,
@@ -13,6 +14,8 @@ import {
   MatHeaderCellDef,
   MatColumnDef,
 } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { CandidateInfoModel } from '../../models/candidate-info.module';
 import { CandidateService } from '../../services/candidate.service';
@@ -26,6 +29,8 @@ import { RouterModule } from '@angular/router';
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatCard,
     MatTable,
     MatRowDef,
@@ -70,5 +75,16 @@ export class CandidateComponent implements OnInit {
   async getCandidateList() {
     this.candidateBasinInfo =
       await this.candidateService.getAllCandidatesBasicInfo();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+  clearFilter() {
+    this.dataSource.filter = '';
   }
 }
