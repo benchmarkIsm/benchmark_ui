@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCard } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -41,6 +42,7 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     MatPaginatorModule,
     MatPaginator,
+    CommonModule,
   ],
   templateUrl: './candidate-component.html',
   styleUrl: './candidate-component.css',
