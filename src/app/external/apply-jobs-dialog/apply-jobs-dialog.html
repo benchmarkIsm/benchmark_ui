@@ -1,5 +1,5 @@
 <h2 mat-dialog-title class="dialog-title text-center">🎯 Job Details</h2>
-
+<mat-divider></mat-divider>
 <mat-dialog-content>
     <div class="container-fluid px-2">
         <div class="row g-3">
@@ -23,12 +23,17 @@
                     <span class="label">Location:</span>
                     <span class="value">{{ data.company.compAddress }}</span>
                 </p>
+                <mat-divider></mat-divider>
 
-                <p class="section-heading mt-4">Description:</p>
-                <p>{{ data.description }}</p>
+                <!-- <p class="section-heading mt-4">Description:</p> -->
+                <ul *ngIf="descriptionList?.length" class="mt-2">
+                    <li *ngFor="let point of descriptionList">{{ point }}</li>
+                </ul>
 
-                <p class="section-heading">Responsibilities:</p>
-                <p>{{ data.responsibility }}</p>
+                <!-- <p class="section-heading">Responsibilities:</p> -->
+                <ul *ngIf="responsibilityList?.length">
+                    <li *ngFor="let point of responsibilityList">{{ point }}</li>
+                </ul>
             </div>
 
             <div class="col-12 col-md-5">

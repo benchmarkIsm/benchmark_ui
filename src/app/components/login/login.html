@@ -1,26 +1,33 @@
 <div class="main-div">
+  <div class="bg-overlay"></div>
+
   <mat-card class="login-card">
-    <mat-card-header>
-      <img src="../../../assets/img/BENCHMARK-logo.png" alt="Card Image" />
+    <mat-card-header class="text-center">
+      <img src="../../../assets/img/BENCHMARK-logo.png" alt="Company Logo" />
     </mat-card-header>
 
     <mat-card-content [formGroup]="loginForm" (keyup.enter)="onSubmit()">
-      <mat-card-subtitle class="text-center subtitle mb-3">Please sign in to continue</mat-card-subtitle>
-      <mat-form-field>
+      <mat-card-subtitle class="text-center subtitle mb-3">
+        Please sign in to continue
+      </mat-card-subtitle>
+
+      <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" required autofocus />
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" required />
       </mat-form-field>
-
-      <div *ngIf="error" class="error-message">{{ error }}</div>
     </mat-card-content>
 
     <mat-card-actions>
       <button mat-raised-button color="primary" id="loginButton" (click)="onSubmit()">LOGIN</button>
     </mat-card-actions>
+
+    <div class="text-center mt-3">
+      <a routerLink="/home" class="home-link">🔙 Back to Job Listings</a>
+    </div>
   </mat-card>
 </div>

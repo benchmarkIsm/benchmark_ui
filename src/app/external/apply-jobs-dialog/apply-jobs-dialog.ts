@@ -35,6 +35,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ApplyJobsDialogComponent {
   applyForm: FormGroup;
+  descriptionList: string[] = [];
+  responsibilityList: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +52,31 @@ export class ApplyJobsDialogComponent {
       relevantExperience: ['', Validators.required],
       resume: [null, Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    if (this.data?.description) {
+      this.descriptionList = this.splitBulletPoints(this.data.description);
+    }
+
+    if (this.data?.responsibility) {
+      this.responsibilityList = this.splitBulletPoints(
+        this.data.responsibility
+      );
+    }
+  }
+
+  private splitBulletPoints(text: string): string[] {
+    // Split on newline with or without bullet and clean up spaces
+    return text
+      .split(/\n•\s*|\n\s*•\s*|•\s*/g)
+      .map((line) => line.trim())
+      .filter(
+        (line) =>
+          line.length > 0 &&
+          line.toLowerCase() !== 'key responsibilities' &&
+          line.toLowerCase() !== 'required skills'
+      );
   }
 
   onFileChange(event: any) {

@@ -19,30 +19,38 @@ export default class CompanyTreeService {
           children: [],
         };
       }
-      // Filter candidates belonging to this JD
+
       const jdCandidates = candidates
-        .filter((c) => c.jdId.jdId === jdId)
-        .map((c) => {
-          return {
-            id: c.bssId.bssId,
-            name: c.bssId.candidateName.trim(),
-            description:
-              'Company Status: ' +
-              c.companyStatus +
-              ' | Candidate Status: ' +
-              c.candidateStatus +
-              (c.interviewDate ? ' | Interview Date: ' + c.interviewDate : ''),
-            route: '/candidate',
-            children: [],
-          };
-        });
+        .filter((c) => Number(c.jdId?.jdId) === Number(jdId))
+        .map((c) => ({
+          id: c.bssId?.bssId,
+          name: c.bssId?.candidateName.trim(),
+          description:
+            `Company Status: ${c.companyStatus} | Candidate Status: ${c.candidateStatus}` +
+            (c.interviewDate && c.interviewDate !== '1900-01-01'
+              ? ` | Interview Date: ${c.interviewDate}`
+              : ''),
+          route: '/candidate',
+          children: [],
+        }));
 
       const jdNode = {
         id: jdId,
         name: jobTitle,
         description: jobTitle,
         route: '/jobDescription',
-        children: jdCandidates,
+        children:
+          jdCandidates.length > 0
+            ? jdCandidates
+            : [
+                {
+                  id: `no-candidate-${jdId}`,
+                  name: 'No candidates referred yet',
+                  description: '',
+                  route: '',
+                  children: [],
+                },
+              ],
       };
 
       companyMap[compName].children.push(jdNode);

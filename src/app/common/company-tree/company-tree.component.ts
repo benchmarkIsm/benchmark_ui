@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 import { JobDescriptionService } from '../../services/job-description.service';
 import CompanyTreeService from '../../services/Company-tree.service';
-
 import { CandidateService } from '../../services/candidate.service';
 import { Router } from '@angular/router';
 
 interface Node {
+  id: number | string;
   name: string;
+  description?: string;
   route?: string;
   children?: Node[];
 }
@@ -18,9 +19,9 @@ interface Node {
 @Component({
   standalone: true,
   selector: 'app-company-tree',
-  imports: [MatTreeModule, MatIconModule, CommonModule],
   templateUrl: './company-tree.component.html',
   styleUrls: ['./company-tree.component.css'],
+  imports: [CommonModule, MatTreeModule, MatIconModule],
 })
 export class CompanyTreeComponent implements OnInit {
   treeControl = new NestedTreeControl<Node>((node) => node.children);
@@ -38,20 +39,17 @@ export class CompanyTreeComponent implements OnInit {
     const jds = await this.jdService.getAllJD();
     const candidates = await this.candidateService.getAllReferanceData();
 
-    this.dataSource.data = this.companyTreeService.transformDataToTree(
-      jds,
-      candidates
-    );
-    this.treeControl.dataNodes = this.dataSource.data;
+    const tree = this.companyTreeService.transformDataToTree(jds, candidates);
+    this.dataSource.data = tree;
+    this.treeControl.dataNodes = tree;
   }
 
   hasChild = (_: number, node: Node) =>
     !!node.children && node.children.length > 0;
 
   navigate(selected: string): void {
-    console.log('selected', selected);
     this.selectedRoute = selected;
-    // TODO: Replace this with Angular Router logic if needed
-    console.log('Navigating to:', selected);
+    console.log('Navigated to ID:', selected);
+    // You can add routing logic here if desired
   }
 }

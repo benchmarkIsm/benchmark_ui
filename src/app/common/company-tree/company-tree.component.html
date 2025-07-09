@@ -4,18 +4,15 @@
             (click)="navigate(node.id)">
             <ng-container *ngIf="hasChild(0, node); else leafIcon">
                 <span class="toggle-icon" (click)="$event.stopPropagation()" matTreeNodeToggle>
-                    <mat-icon>
-                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
-                    </mat-icon>
+                    <mat-icon>{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}</mat-icon>
                 </span>
             </ng-container>
 
             <ng-template #leafIcon>
-                <!-- no stopPropagation here so icon click also triggers navigate -->
                 <mat-icon class="node-icon">person</mat-icon>
             </ng-template>
 
-            <span class="node-text" title={{node.description}}>{{ node.name }}</span>
+            <span class="node-text" title="{{ node.description }}">{{ node.name }}</span>
         </div>
 
         <div *ngIf="hasChild(0, node) && treeControl.isExpanded(node)">

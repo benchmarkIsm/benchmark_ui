@@ -5,7 +5,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../material/material-module';
 import { NotificationService } from '../../services/notification.service';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -15,7 +15,7 @@ import { AuthenticationService } from '../../services/authentication.service';
   selector: 'app-login',
   templateUrl: './login.html',
   styleUrl: './login.css',
-  imports: [ReactiveFormsModule, MaterialModule],
+  imports: [ReactiveFormsModule, MaterialModule, RouterModule],
 })
 export class Login implements OnInit {
   loginForm: FormGroup;
