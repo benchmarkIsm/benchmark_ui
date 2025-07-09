@@ -37,16 +37,15 @@ import { CandidateReferComponent } from '../candidate-refer/candidate-refer';
   styleUrl: './candidate-edit-component.css',
 })
 export class CandidateEditComponent implements OnInit {
-  searchForm: FormGroup;
   candidateForm: FormGroup;
 
   buttonText = 'Create Candidate';
   isNewCandidate = true;
-  showCandidateForm = false;
 
   candidateInfo: CandidateInfoModel = new CandidateInfoModel();
   isFormValid = false;
   formSubscription: Subscription;
+  private isFetchingCandidate = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,7 +64,6 @@ export class CandidateEditComponent implements OnInit {
         if (this.candidateInfo?.bssId != null) {
           this.isNewCandidate = false;
           this.buttonText = 'Update Candidate';
-          this.showCandidateForm = true;
           this.setupCandidateForm();
           this.updateValidity();
         }
@@ -77,14 +75,6 @@ export class CandidateEditComponent implements OnInit {
   }
 
   private initForms() {
-    this.searchForm = this.fb.group(
-      {
-        phoneSearch: [''],
-        emailSearch: [''],
-      },
-      { validators: this.atLeastOneValidator }
-    );
-
     this.candidateForm = this.fb.group({
       candidateName: ['', Validators.required],
       phoneNo: ['', Validators.required],
@@ -106,14 +96,6 @@ export class CandidateEditComponent implements OnInit {
     });
   }
 
-  private atLeastOneValidator(
-    group: AbstractControl
-  ): { [key: string]: any } | null {
-    const phone = group.get('phoneSearch')?.value;
-    const email = group.get('emailSearch')?.value;
-    return phone || email ? null : { required: true };
-  }
-
   private setupCandidateForm() {
     this.candidateForm.patchValue({ ...this.candidateInfo });
   }
@@ -123,50 +105,34 @@ export class CandidateEditComponent implements OnInit {
     this.isFormValid = this.candidateForm.valid;
   }
 
-  async search() {
-    if (this.searchForm.invalid) {
-      this.notifier.showWarning(
-        'Either Phone or Email is required to search.',
-        '',
-        false
+  async autoSearch(type: 'phone' | 'email') {
+    if (!this.isNewCandidate || this.isFetchingCandidate) return;
+
+    const phone = this.candidateForm.get('phoneNo')?.value;
+    const email = this.candidateForm.get('email')?.value;
+
+    if (!phone && !email) return;
+
+    // Prevent duplicate calls
+    this.isFetchingCandidate = true;
+
+    try {
+      const data = await this.candidateService.getCandidateByPhoneOrEmail(
+        phone,
+        email
       );
-      return;
+      if (data) {
+        this.candidateInfo = { ...data };
+        this.isNewCandidate = false;
+        this.buttonText = 'Update Candidate';
+        this.setupCandidateForm();
+        this.updateValidity();
+      }
+    } catch (err) {
+      console.error('Error fetching candidate info:', err);
+    } finally {
+      this.isFetchingCandidate = false;
     }
-
-    const phone = this.searchForm.get('phoneSearch')?.value;
-    const email = this.searchForm.get('emailSearch')?.value;
-
-    const data = await this.candidateService.getCandidateByPhoneOrEmail(
-      phone,
-      email
-    );
-    if (data) {
-      this.candidateInfo = data;
-      this.isNewCandidate = false;
-      this.buttonText = 'Update Candidate';
-      this.setupCandidateForm();
-    } else {
-      this.candidateInfo = new CandidateInfoModel();
-      this.candidateInfo.phoneNo = phone;
-      this.candidateInfo.email = email;
-      this.candidateForm.reset();
-      this.candidateForm.patchValue({
-        phoneNo: phone,
-        email: email,
-      });
-      this.buttonText = 'Create Candidate';
-    }
-
-    this.showCandidateForm = true;
-    this.updateValidity();
-  }
-
-  resetToSearch() {
-    this.showCandidateForm = false;
-    this.isNewCandidate = true;
-    this.searchForm.reset();
-    this.candidateForm.reset();
-    this.candidateInfo = new CandidateInfoModel();
   }
 
   async saveCandidate() {

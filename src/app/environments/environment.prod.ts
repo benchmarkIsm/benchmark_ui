@@ -4,7 +4,7 @@
 
 export const environment = {
   mock: false,
-  production: false,
-  data_api: 'http://localhost:9099/api/',
-  core_api: 'http://localhost:5006/',
+  production: true,
+  data_api: 'https://aphid-cute-boxer.ngrok-free.app/api/',
+  core_api: 'https://aphid-cute-boxer.ngrok-free.app:5006/',
 };

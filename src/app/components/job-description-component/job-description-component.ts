@@ -38,7 +38,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
   templateUrl: './job-description-component.html',
   styleUrl: './job-description-component.css',
 })
-export class JobDescriptionComponent {
+export class JobDescriptionComponent implements OnInit {
   jd: JobDescriptionModel[] = [];
   dataSource: MatTableDataSource<JobDescriptionModel>;
   tableColumns: string[] = [

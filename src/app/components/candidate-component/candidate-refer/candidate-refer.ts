@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
@@ -45,7 +52,7 @@ export interface CandidateReferanceInfo extends CandidateReferanceInfoModel {
   templateUrl: './candidate-refer.html',
   styleUrl: './candidate-refer.css',
 })
-export class CandidateReferComponent implements OnInit {
+export class CandidateReferComponent implements OnInit, OnChanges {
   @Input() candidateData: CandidateInfoModel;
   referenceForm: FormGroup;
   formSubscription: Subscription;
@@ -65,6 +72,7 @@ export class CandidateReferComponent implements OnInit {
     'companyStatus',
     'actions',
   ];
+  private dataLoaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,20 +88,40 @@ export class CandidateReferComponent implements OnInit {
 
   async ngOnInit() {
     this.initForm();
-    await this.getCompanyList();
-    await this.getjobList();
-    await this.getAllStatus();
+    await this.loadInitialData();
 
-    if (this.candidateData.bssId != null) {
-      this.getCandidateReferanceData();
-    }
     this.referenceForm.setValue({
       company: this.company,
       job: this.jobDescription,
       status: this.status,
     });
+
     this.referenceForm.get('job').disable();
     this.referenceForm.get('status').disable();
+  }
+
+  private async loadInitialData() {
+    await this.getCompanyList();
+    await this.getjobList();
+    await this.getAllStatus();
+    this.dataLoaded = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['candidateData'] && this.candidateData?.bssId) {
+      if (this.dataLoaded) {
+        this.getCandidateReferanceData();
+      } else {
+        this.waitForDataAndFetchReferences();
+      }
+    }
+  }
+
+  private async waitForDataAndFetchReferences() {
+    while (!this.dataLoaded) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    this.getCandidateReferanceData();
   }
 
   initForm() {

@@ -8,6 +8,8 @@ import { JobDescriptionComponent } from './components/job-description-component/
 import { JobDescriptionEditComponent } from './components/job-description-component/job-description-edit-component/job-description-edit-component';
 import { CandidateComponent } from './components/candidate-component/candidate-component';
 import { CandidateEditComponent } from './components/candidate-component/candidate-edit-component/candidate-edit-component';
+import { UsersComponent } from './components/users-component/users-component';
+import { UserEditComponent } from './components/users-component/user-edit-component/user-edit-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -46,11 +48,33 @@ export const routes: Routes = [
   },
   {
     path: 'candidate',
-    component: CandidateComponent,
+    children: [
+      {
+        path: '',
+        component: CandidateComponent,
+      },
+      {
+        path: 'add',
+        component: CandidateEditComponent,
+      },
+      {
+        path: 'details',
+        component: CandidateEditComponent,
+      },
+    ],
   },
   {
-    path: 'candidateDetails',
-    component: CandidateEditComponent,
+    path: 'user',
+    children: [
+      {
+        path: '',
+        component: UsersComponent,
+      },
+      {
+        path: 'edit',
+        component: UserEditComponent,
+      },
+    ],
   },
   { path: '**', redirectTo: '' },
 ];
