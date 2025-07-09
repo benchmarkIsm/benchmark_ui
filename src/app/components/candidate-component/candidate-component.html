@@ -1,13 +1,14 @@
 <mat-card class="p-3">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h3 class="mb-0">Candidate List</h3>
         <button mat-flat-button color="primary" [routerLink]="['/candidate/add']">
             <mat-icon class="me-1">add</mat-icon>
             Add Candidate
         </button>
     </div>
+
     <div class="d-flex justify-content-end mb-3">
-        <mat-form-field appearance="outline" class="w-25">
+        <mat-form-field appearance="outline" class="w-25 w-100-mobile">
             <mat-label>Search Candidate</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Name, Phone, Email, Location, Position etc." />
             <button mat-icon-button matSuffix *ngIf="dataSource.filter" (click)="clearFilter()" aria-label="Clear">
@@ -15,59 +16,56 @@
             </button>
         </mat-form-field>
     </div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
-        <!-- Candidate Columns -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 w-100">
+
         <ng-container matColumnDef="candidateName">
             <th mat-header-cell *matHeaderCellDef>Candidate Name</th>
-            <td mat-cell *matCellDef="let element" class="card-title">{{ element.candidateName }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Candidate Name">{{ element.candidateName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="phoneNo">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
-            <td mat-cell *matCellDef="let element">{{ element.phoneNo }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Phone">{{ element.phoneNo }}</td>
         </ng-container>
 
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef>Email</th>
-            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Email">{{ element.email }}</td>
         </ng-container>
 
         <ng-container matColumnDef="position">
             <th mat-header-cell *matHeaderCellDef>Position</th>
-            <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Position">{{ element.position }}</td>
         </ng-container>
 
         <ng-container matColumnDef="currentLocation">
             <th mat-header-cell *matHeaderCellDef>Current Location</th>
-            <td mat-cell *matCellDef="let element">{{ element.currentLocation }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Current Location">{{ element.currentLocation }}</td>
         </ng-container>
 
         <ng-container matColumnDef="totalExp">
             <th mat-header-cell *matHeaderCellDef>Total Exp</th>
-            <td mat-cell *matCellDef="let element">{{ element.totalExp }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Total Exp">{{ element.totalExp }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="currentCtc">
-            <th mat-header-cell *matHeaderCellDef>Current CTC</th>
-            <td mat-cell *matCellDef="let element">{{ element.currentCtc }}</td>
+        <ng-container matColumnDef="currentCompany">
+            <th mat-header-cell *matHeaderCellDef>Current Company</th>
+            <td mat-cell *matCellDef="let element" data-label="Current CTC">{{ element.currentCompany }}</td>
         </ng-container>
 
-        <!-- Actions Column -->
         <ng-container matColumnDef="edit_action">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" data-label="Actions">
                 <button mat-icon-button class="screen-only">
                     <mat-icon svgIcon="edit_icon" [routerLink]="['/candidate/details']" [state]="element"></mat-icon>
                 </button>
             </td>
         </ng-container>
 
-        <!-- Table Rows -->
         <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
 
-    <!-- Mat Paginator -->
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 15, 25]" showFirstLastButtons></mat-paginator>
 </mat-card>

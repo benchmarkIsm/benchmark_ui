@@ -1,0 +1,50 @@
+/* Mobile Responsive Table */
+@media screen and (max-width: 768px) {
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    display: block;
+    background: #fff;
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .mat-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .mat-cell:last-child {
+    border-bottom: none;
+  }
+
+  .mat-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #444;
+    flex: 1;
+    padding-right: 8px;
+  }
+
+  .w-25 {
+    width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .mat-cell::before {
+    content: none !important;
+  }
+}
+
+.w-100-mobile {
+  width: 100%;
+}

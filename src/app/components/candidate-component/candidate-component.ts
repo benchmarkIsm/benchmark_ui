@@ -56,8 +56,8 @@ export class CandidateComponent implements OnInit {
     'email',
     'position',
     'currentLocation',
+    'currentCompany',
     'totalExp',
-    'currentCtc',
     'edit_action',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Header } from './components/header/header';
+import { JobPostingComponent } from './external/job-posting/job-posting';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +61,8 @@ export class App {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showHeader = !event.urlAfterRedirects.startsWith('/login');
+        const hiddenRoutes = ['/login', '/home'];
+        this.showHeader = !hiddenRoutes.includes(event.urlAfterRedirects);
       });
   }
 

@@ -1,15 +1,31 @@
-
-
-.mat-description {
-    font-weight: bold;
-    font-size: 0.9rem;
+.dialog-content-scroll {
+  max-height: 75vh;
+  overflow-y: auto;
 }
 
-.mat-divider-width{
-    border-top-width: 2px;
-    border-top-color: rgb(14, 1, 1);
+.mat-form-field {
+  font-size: 0.95rem;
+}
+
+.mat-label {
+  font-weight: bold;
+}
+
+mat-divider {
+  margin: 8px 0;
+}
+
+@media (max-width: 768px) {
+  mat-dialog-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .full-width-field {
+  mat-dialog-actions button {
     width: 100%;
- }
+  }
+
+  .mat-form-field {
+    font-size: 0.9rem;
+  }
+}

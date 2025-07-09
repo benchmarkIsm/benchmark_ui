@@ -1,71 +1,60 @@
-
-@media screen and (max-width: 480px) {
-
-    .mat-elevation-z8 {
-        background: transparent;
-        box-shadow: none;
-    }
-
-    .mat-header-row {
-        display: none;
-    }
-
-    tbody {
-        display: block;
-        width: 100%;
-    }
-
-    .mat-table .mat-row {
-        display: block;
-        overflow: hidden;
-        height: auto;
-        position: relative;
-        clear: both;
-        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
-        background-color: #fff;
-        border-radius: 3px;
-    }
-
-    .mat-table .mat-row+.mat-row {
-        margin-top: 24px;
-    }
-
-    .mat-table .mat-cell {
-        display: block;
-        width: 100%;
-        padding: 0 16px;
-        margin: 16px 0;
-        border: 0 none;
-    }
-
-    .mat-table .mat-cell:first-child {
-        padding: 0 48px 0 16px;
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
+/* Desktop Defaults */
+.mat-elevation-z8 {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-section {
-  display: flex;
-  align-items: center;
+.mat-header-cell,
+.mat-cell {
+  padding: 12px 16px;
+  font-size: 0.95rem;
 }
 
-.example-label {
-  font-size: 14px;
-  margin: 0 16px 0 8px;
-  min-width: 120px;
-}
+/* Mobile Styles */
+@media screen and (max-width: 767px) {
+  .mat-elevation-z8 {
+    background: transparent;
+    box-shadow: none;
+  }
 
-.example-button-row {
-  max-width: 600px;
-}
+  .mat-header-row {
+    display: none !important;
+  }
 
-.example-button-row .mat-mdc-button-base {
-  margin: 8px 8px 8px 0;
-}
+  table.mat-table {
+    display: block;
+    width: 100%;
+  }
 
-.example-flex-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  .mat-row {
+    display: block;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .mat-cell {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+  }
+
+  .mat-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    min-width: 120px;
+    color: #555;
+    margin-right: 12px;
+  }
+
+  .mat-cell:last-child {
+    border-bottom: none;
+  }
 }

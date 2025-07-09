@@ -12,6 +12,77 @@ import { UsersComponent } from './components/users-component/users-component';
 import { UserEditComponent } from './components/users-component/user-edit-component/user-edit-component';
 import { JobPostingComponent } from './external/job-posting/job-posting';
 
+// export const routes: Routes = [
+//   {
+//     path: '',
+//     redirectTo: '/home',
+//     pathMatch: 'full',
+//   },
+//   {
+//     path: 'home',
+//     component: JobPostingComponent,
+//   },
+//   {
+//     path: 'login',
+//     component: Login,
+//   },
+//   {
+//     path: 'header',
+//     component: Header,
+//   },
+//   {
+//     path: 'dashboard',
+//     component: Dashboard,
+//   },
+//   {
+//     path: 'company',
+//     component: CompanyComponent,
+//   },
+//   {
+//     path: 'jobDesciption',
+//     component: JobDescriptionComponent,
+//   },
+//   {
+//     path: 'jdDetails',
+//     component: JobDescriptionEditComponent,
+//   },
+//   {
+//     path: 'status',
+//     component: StatusComponent,
+//   },
+//   {
+//     path: 'candidate',
+//     children: [
+//       {
+//         path: '',
+//         component: CandidateComponent,
+//       },
+//       {
+//         path: 'add',
+//         component: CandidateEditComponent,
+//       },
+//       {
+//         path: 'details',
+//         component: CandidateEditComponent,
+//       },
+//     ],
+//   },
+//   {
+//     path: 'user',
+//     children: [
+//       {
+//         path: '',
+//         component: UsersComponent,
+//       },
+//       {
+//         path: 'edit',
+//         component: UserEditComponent,
+//       },
+//     ],
+//   },
+//   { path: '**', redirectTo: '' },
+// ];
+
 export const routes: Routes = [
   {
     path: '',
@@ -24,11 +95,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: Login,
-  },
-  {
-    path: 'header',
-    component: Header,
+    component: Login, // NO header/sidebar
   },
   {
     path: 'dashboard',

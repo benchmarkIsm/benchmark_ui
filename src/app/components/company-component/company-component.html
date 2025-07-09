@@ -11,39 +11,38 @@
 
         <ng-container matColumnDef="compName">
             <th mat-header-cell *matHeaderCellDef>Company Name</th>
-            <td mat-cell *matCellDef="let element" class="card-title">{{ element.compName }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Company Name">{{ element.compName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="contactPersonName">
             <th mat-header-cell *matHeaderCellDef>Contact Person</th>
-            <td mat-cell *matCellDef="let element">{{ element.contactPersonName }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Contact Person">{{ element.contactPersonName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="contactPersonPhone">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
-            <td mat-cell *matCellDef="let element">{{ element.contactPersonPhone }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Phone">{{ element.contactPersonPhone }}</td>
         </ng-container>
 
         <ng-container matColumnDef="contactPersonEmail">
             <th mat-header-cell *matHeaderCellDef>Email</th>
-            <td mat-cell *matCellDef="let element">{{ element.contactPersonEmail }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Email">{{ element.contactPersonEmail }}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let element">{{ element.compStatus }}</td>
+            <td mat-cell *matCellDef="let element" data-label="Status">{{ element.compStatus }}</td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button class="screen-only">
-                    <mat-icon svgIcon="edit_icon" (click)="openDialogForCompanyEdit(element)"></mat-icon>
+            <td mat-cell *matCellDef="let element" data-label="Actions">
+                <button mat-icon-button (click)="openDialogForCompanyEdit(element)">
+                    <mat-icon svgIcon="edit_icon"></mat-icon>
                 </button>
-
-                <!-- <button mat-icon-button class="screen-only">
-                    <mat-icon matTooltip="MOU" (click)="openDialogForCompanyMou()">settings</mat-icon>
-                </button> -->
+                <button mat-icon-button (click)="openDialogForCompanyMou()">
+                    <mat-icon matTooltip="MOU">settings</mat-icon>
+                </button>
             </td>
         </ng-container>
 

@@ -1,0 +1,42 @@
+/* Ensure mat-form-fields span full width on small devices */
+mat-form-field {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-mat-table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .mat-header-row,
+  .mat-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    flex: 1 1 100%;
+    padding: 8px;
+  }
+
+  .mat-cell::before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    display: inline-block;
+    width: 120px;
+  }
+
+  th.mat-header-cell {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .mat-cell::before {
+    content: none !important;
+  }
+}

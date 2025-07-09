@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../material/material-module';
 import { NotificationService } from '../../services/notification.service';
-import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [ReactiveFormsModule, MaterialModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
+  imports: [ReactiveFormsModule, MaterialModule],
 })
 export class Login implements OnInit {
   loginForm: FormGroup;
+  error: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -35,10 +39,6 @@ export class Login implements OnInit {
     });
   }
 
-  get form() {
-    return this.loginForm.controls;
-  }
-
   get usernameControl() {
     return this.loginForm.get('username');
   }
@@ -49,24 +49,28 @@ export class Login implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.invalid) {
-      console.log('Form submitted:', this.loginForm.value);
-      this.notification.showWarning('Username/Password incorrect', '', false);
-      // this.router.navigate(['/dashboard']);
+      this.error = 'Username and Password are required.';
+      return;
     }
+
     try {
       const user = await this.authService.login(
-        this.usernameControl.value,
-        this.passwordControl.value
+        this.usernameControl?.value,
+        this.passwordControl?.value
       );
+
       if (user) {
+        this.error = '';
         this.router.navigate(['/dashboard']);
         this.notification.showInfo('User Logged in', '', false);
       } else {
-        this.notification.showError('Username/Password incorrect', '', false);
+        this.error = 'Invalid username or password.';
+        this.notification.showError(this.error, '', false);
       }
-    } catch (error) {
-      this.notification.showError('Error in Authentication', '', false);
-      console.error(error);
+    } catch (err) {
+      this.error = 'Authentication failed. Please try again.';
+      this.notification.showError(this.error, '', false);
+      console.error(err);
     }
   }
 }
