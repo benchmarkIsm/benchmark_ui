@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let job of jobs">
+            <mat-card class="mat-elevation-z3">
+                <mat-card-header>
+                    <mat-card-title>{{ job.jobPositionTitle }}</mat-card-title>
+                    <!-- <mat-card-subtitle>{{ job.company?.compName }}</mat-card-subtitle> -->
+                </mat-card-header>
+                <br>
+                <mat-card-content>
+                    <p><strong>Experience:</strong> {{ job.experienceFrom }} - {{ job.experienceTo }} yrs <br>
+                        <strong>Location:</strong> {{ job.company.compAddress }}
+                    </p>
+                    <!-- <p><strong>Urgency:</strong> {{ job.positionUrgency }}</p> -->
+                </mat-card-content>
+                <br>
+                <mat-card-actions>
+                    <button mat-flat-button color="primary" (click)="openDialog(job)">View Details & Apply</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

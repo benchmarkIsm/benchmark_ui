@@ -1,0 +1,9 @@
+.container {
+  padding: 16px;
+}
+mat-card {
+  min-height: 160px;
+}
+mat-card-title {
+  font-size: 1.25rem;
+}

@@ -10,13 +10,17 @@ import { CandidateComponent } from './components/candidate-component/candidate-c
 import { CandidateEditComponent } from './components/candidate-component/candidate-edit-component/candidate-edit-component';
 import { UsersComponent } from './components/users-component/users-component';
 import { UserEditComponent } from './components/users-component/user-edit-component/user-edit-component';
+import { JobPostingComponent } from './external/job-posting/job-posting';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/home',
     pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: JobPostingComponent,
   },
   {
     path: 'login',
